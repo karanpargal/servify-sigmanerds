@@ -14,6 +14,14 @@ const orderSchema = new mongoose.Schema(
       type: mongoose.Schema.Types.ObjectId,
       required: [true, "Please enter seller"],
     },
+    status: {
+      type: String,
+      enum: {
+        values: ["Upcoming", "In Progress", "Completed", "Cancelled"],
+        message: "Please select correct status for order",
+      },
+      default: "Upcoming",
+    },
     serviceDate: {
       type: Date,
       required: [true, "Please enter service date"],
@@ -30,14 +38,6 @@ const orderSchema = new mongoose.Schema(
       type: Number,
       required: [true, "Please enter amount"],
       default: 0.0,
-    },
-    status: {
-      type: String,
-      enum: {
-        values: ["Pending", "Completed", "Refunded"],
-        message: "Please select correct status for order",
-      },
-      default: "Pending",
     },
     paymentHash: {
       type: String,
