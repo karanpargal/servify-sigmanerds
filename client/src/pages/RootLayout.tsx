@@ -4,7 +4,7 @@ import { NavLink, Outlet } from 'react-router-dom';
 export default function RootLayout() {
   return (
     <div>
-      <header className="border-b border-neutral-200">
+      <header className="border-b border-neutral-200 bg-background-secondary">
         <nav className="mx-auto flex max-w-7xl items-center justify-center">
           <NavLink to="/">
             {({ isActive }) => (
@@ -18,7 +18,7 @@ export default function RootLayout() {
                 {isActive && (
                   <motion.span
                     layoutId="rootLayoutNavIndicator"
-                    className="bg-accent-primary absolute bottom-0 left-0 h-0.5 w-full"
+                    className="absolute bottom-0 left-0 h-0.5 w-full bg-accent-primary"
                   />
                 )}
               </motion.div>
@@ -32,11 +32,11 @@ export default function RootLayout() {
                   isActive && 'text-accent-primary',
                 )}
               >
-                Order
+                Orders
                 {isActive && (
                   <motion.span
                     layoutId="rootLayoutNavIndicator"
-                    className="bg-accent-primary absolute bottom-0 left-0 h-0.5 w-full"
+                    className="absolute bottom-0 left-0 h-0.5 w-full bg-accent-primary"
                   />
                 )}
               </div>
@@ -54,7 +54,7 @@ export default function RootLayout() {
                 {isActive && (
                   <motion.span
                     layoutId="rootLayoutNavIndicator"
-                    className="bg-accent-primary absolute bottom-0 left-0 h-0.5 w-full"
+                    className="absolute bottom-0 left-0 h-0.5 w-full bg-accent-primary"
                   />
                 )}
               </div>
@@ -72,7 +72,7 @@ export default function RootLayout() {
                 {isActive && (
                   <motion.span
                     layoutId="rootLayoutNavIndicator"
-                    className="bg-accent-primary absolute bottom-0 left-0 h-0.5 w-full"
+                    className="absolute bottom-0 left-0 h-0.5 w-full bg-accent-primary"
                   />
                 )}
               </div>

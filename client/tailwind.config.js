@@ -1,5 +1,8 @@
+import animatePlugin from 'tailwindcss-animate';
+import defaultTheme from 'tailwindcss/defaultTheme';
+
 /** @type {import('tailwindcss').Config} */
-module.exports = {
+const config = {
   darkMode: ['class'],
   content: [
     './pages/**/*.{ts,tsx}',
@@ -15,20 +18,31 @@ module.exports = {
         '2xl': '1400px',
       },
     },
+
     extend: {
+      fontFamily: {
+        sans: ['Inter', ...defaultTheme.fontFamily.sans],
+      },
       colors: {
         background: {
-          primary: 'var(--background-primary)',
-          secondary: 'var(--background-secondary)',
+          primary: '#f5f5f5',
+          secondary: '#fefefb',
         },
         accent: {
-          primary: 'var(--accent-primary)',
-          secondary: 'var(--accent-secondary)',
+          primary: '#fc7f58',
+          secondary: '#75a9dd',
         },
 
         text: {
-          primary: 'var(--text-primary)',
-          secondary: 'var(--text-secondary)',
+          primary: '#1d1d1d',
+          secondary: '#6E6E6E',
+        },
+
+        status: {
+          upcoming: '#df800c',
+          inprogress: '#0060c7',
+          completed: '#08911f',
+          cancelled: '#d12323',
         },
       },
 
@@ -46,7 +60,12 @@ module.exports = {
         'accordion-down': 'accordion-down 0.2s ease-out',
         'accordion-up': 'accordion-up 0.2s ease-out',
       },
+      boxShadow: {
+        card: 'rgba(0, 0, 0, 0.04) 0px 3px 5px',
+      },
     },
   },
-  plugins: [require('tailwindcss-animate')],
+  plugins: [animatePlugin],
 };
+
+export default config;

@@ -17,6 +17,7 @@
     "@types/node": "^20.10.4",
     "class-variance-authority": "^0.7.0",
     "clsx": "^2.0.0",
+    "dayjs": "^1.11.10",
     "framer-motion": "^10.16.15",
     "localforage": "^1.10.0",
     "match-sorter": "^6.3.1",
