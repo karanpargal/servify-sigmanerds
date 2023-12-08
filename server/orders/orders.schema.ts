@@ -5,14 +5,17 @@ const orderSchema = new mongoose.Schema(
     consumer: {
       type: mongoose.Schema.Types.ObjectId,
       required: [true, "Please enter consumer"],
+      ref: "User",
     },
     service: {
       type: mongoose.Schema.Types.ObjectId,
       required: [true, "Please enter service"],
+      ref: "Service",
     },
     seller: {
       type: mongoose.Schema.Types.ObjectId,
       required: [true, "Please enter seller"],
+      ref: "User",
     },
     status: {
       type: String,

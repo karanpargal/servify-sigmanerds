@@ -1,5 +1,4 @@
-import { OrderType } from "./orders.schema";
-import orderSchema from "./orders.schema";
+import orderSchema, { OrderType } from "./orders.schema";
 
 const createOrder = async (order: OrderType) => {
   try {
@@ -12,7 +11,11 @@ const createOrder = async (order: OrderType) => {
 
 const getOrder = async (id: string) => {
   try {
-    const order = await orderSchema.findById(id);
+    const order = await orderSchema
+      .findById(id)
+      .populate("service")
+      .populate("consumer")
+      .populate("seller");
     if (!order) {
       throw new Error("Order not found");
     }
@@ -24,7 +27,11 @@ const getOrder = async (id: string) => {
 
 const getOrdersByConsumer = async (consumer: string) => {
   try {
-    const orders = await orderSchema.find({ consumer });
+    const orders = await orderSchema
+      .find({ consumer })
+      .populate("service")
+      .populate("consumer")
+      .populate("seller");
     return orders;
   } catch (error) {
     throw error;
@@ -33,7 +40,11 @@ const getOrdersByConsumer = async (consumer: string) => {
 
 const getOrdersBySeller = async (seller: string) => {
   try {
-    const orders = await orderSchema.find({ seller });
+    const orders = await orderSchema
+      .find({ seller })
+      .populate("service")
+      .populate("consumer")
+      .populate("seller");
     return orders;
   } catch (error) {
     throw error;
@@ -42,7 +53,11 @@ const getOrdersBySeller = async (seller: string) => {
 
 const getOrders = async () => {
   try {
-    const orders = await orderSchema.find({});
+    const orders = await orderSchema
+      .find({})
+      .populate("service")
+      .populate("consumer")
+      .populate("seller");
     return orders;
   } catch (error) {
     throw error;
@@ -51,9 +66,13 @@ const getOrders = async () => {
 
 const updateOrder = async (id: string, order: OrderType) => {
   try {
-    const updatedOrder = await orderSchema.findByIdAndUpdate(id, order, {
-      new: true,
-    });
+    const updatedOrder = await orderSchema
+      .findByIdAndUpdate(id, order, {
+        new: true,
+      })
+      .populate("service")
+      .populate("consumer")
+      .populate("seller");
     return updatedOrder;
   } catch (error) {
     throw error;
@@ -71,10 +90,10 @@ const deleteOrder = async (id: string) => {
 
 export {
   createOrder,
+  deleteOrder,
   getOrder,
+  getOrders,
   getOrdersByConsumer,
   getOrdersBySeller,
-  getOrders,
   updateOrder,
-  deleteOrder,
 };

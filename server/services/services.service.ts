@@ -1,5 +1,4 @@
-import servicesSchema from "./services.schema";
-import { ServiceType } from "./services.schema";
+import servicesSchema, { ServiceType } from "./services.schema";
 
 const createService = async (service: ServiceType) => {
   try {
@@ -12,7 +11,10 @@ const createService = async (service: ServiceType) => {
 
 const getService = async (id: string) => {
   try {
-    const service = await servicesSchema.findById(id);
+    const service = await servicesSchema
+      .findById(id)
+      .populate("seller")
+      .populate("reviews.user");
     if (!service) {
       throw new Error("Service not found");
     }
@@ -24,7 +26,10 @@ const getService = async (id: string) => {
 
 const getUsersServices = async (seller: string) => {
   try {
-    const services = await servicesSchema.find({ seller });
+    const services = await servicesSchema
+      .find({ seller })
+      .populate("seller")
+      .populate("reviews.user");
     return services;
   } catch (error) {
     throw error;
@@ -33,7 +38,10 @@ const getUsersServices = async (seller: string) => {
 
 const getServices = async () => {
   try {
-    const services = await servicesSchema.find({});
+    const services = await servicesSchema
+      .find({})
+      .populate("seller")
+      .populate("reviews.user");
     return services;
   } catch (error) {
     throw error;
@@ -42,9 +50,12 @@ const getServices = async () => {
 
 const updateService = async (id: string, service: ServiceType) => {
   try {
-    const updatedService = await servicesSchema.findByIdAndUpdate(id, service, {
-      new: true,
-    });
+    const updatedService = await servicesSchema
+      .findByIdAndUpdate(id, service, {
+        new: true,
+      })
+      .populate("seller")
+      .populate("reviews.user");
     return updatedService;
   } catch (error) {
     throw error;
@@ -62,9 +73,9 @@ const deleteService = async (id: string) => {
 
 export {
   createService,
-  getService,
-  getUsersServices,
-  getServices,
-  updateService,
   deleteService,
+  getService,
+  getServices,
+  getUsersServices,
+  updateService,
 };

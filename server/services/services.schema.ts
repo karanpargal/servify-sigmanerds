@@ -38,6 +38,7 @@ const serviceSchema = new mongoose.Schema({
   seller: {
     type: mongoose.Schema.Types.ObjectId,
     required: [true, "Please enter service seller"],
+    ref: "User",
   },
   numOfReviews: {
     type: Number,
@@ -48,6 +49,7 @@ const serviceSchema = new mongoose.Schema({
       user: {
         type: mongoose.Schema.Types.ObjectId,
         required: true,
+        ref: "User",
       },
       rating: {
         type: Number,

@@ -24,12 +24,13 @@
     "typescript": "^5.2.2"
   },
   "dependencies": {
+    "@pushprotocol/restapi": "^1.4.45",
     "@types/mongoose": "^5.11.97",
     "axios": "^1.5.1",
     "bcrypt": "^5.1.1",
     "cors": "^2.8.5",
     "dotenv": "^16.3.1",
-    "ethers": "^5.7",
+    "ethers": "^5.6",
     "express": "^4.18.2",
     "jsonwebtoken": "^9.0.2",
     "mongoose": "^8.0.3",
