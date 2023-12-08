@@ -85,5 +85,6 @@ export type ServiceType = {
     rating: number;
     comment: string;
   }[];
+  isActive: boolean;
   createdAt: Date;
 };

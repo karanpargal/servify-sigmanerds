@@ -65,4 +65,6 @@ export type OrderType = {
   paymentHash: string;
   paidAt: Date;
   completedAt: Date;
+  isAccepted: boolean;
+  createdAt: Date;
 };
