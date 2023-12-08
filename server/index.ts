@@ -2,6 +2,7 @@ import express, { type Express, type Request, type Response } from "express";
 import { config as DotenvConfig } from "dotenv";
 import { connectDB } from "./utils/connectDB";
 import cors from "cors";
+import userRouter from "./users/users.routes";
 DotenvConfig();
 connectDB();
 
@@ -9,6 +10,8 @@ const app: Express = express();
 
 app.use(cors());
 app.use(express.json());
+
+app.use("/api/v1/users", userRouter);
 
 app.get("/", (req: Request, res: Response) => {
   res.send("Hello World");
