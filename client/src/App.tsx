@@ -4,11 +4,11 @@ import NotFound from '@/pages/404';
 import Home from '@/pages/Home';
 import Orders from '@/pages/Orders';
 import RootLayout from '@/pages/RootLayout';
-import Accounts from './pages/Accounts';
+import Accounts from './pages/Account';
 import ConsumerDashboard from './pages/ConsumerDashboard';
 
 function App() {
-  const isAuth = true;
+  const isAuth = false;
 
   return (
     <Routes>

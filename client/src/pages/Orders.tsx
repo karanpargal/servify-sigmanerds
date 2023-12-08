@@ -122,7 +122,7 @@ function OrderCard({ order }: Props) {
 
 export default function Orders() {
   return (
-    <main className="mx-auto max-w-3xl bg-background-secondary px-6 pb-10 pt-44">
+    <main className="mx-auto mb-12 mt-32 max-w-3xl rounded-xl bg-background-secondary p-6 pt-14">
       <h1 className="mb-14 text-4xl font-bold">Your Orders</h1>
       <section className="space-y-6">
         <OrderCard
@@ -158,7 +158,7 @@ export default function Orders() {
             title:
               'Kitchen and Bathroom Pest Control Kitchen and Bathroom Pest Control Kitchen and Bathroom Pest Control',
             description: 'Lorem ipsum',
-            scheduleDate: new Date(),
+            completionDate: new Date(),
             status: 'COMPLETED',
             price: 100,
             provider: {

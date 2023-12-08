@@ -60,7 +60,7 @@ export default function RootLayout() {
               </div>
             )}
           </NavLink>
-          <NavLink to="/accounts">
+          <NavLink to="/account">
             {({ isActive }) => (
               <div
                 className={cn(
@@ -68,7 +68,7 @@ export default function RootLayout() {
                   isActive && 'text-accent-primary',
                 )}
               >
-                Accounts
+                Account
                 {isActive && (
                   <motion.span
                     layoutId="rootLayoutNavIndicator"
