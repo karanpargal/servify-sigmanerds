@@ -1,17 +1,25 @@
-import { RouterProvider, createBrowserRouter } from 'react-router-dom';
-import Auth from '@/pages/Auth';
+import { BrowserRouter, Route, Routes } from 'react-router-dom';
+
+import NotFound from '@/pages/404';
 import Home from '@/pages/Home';
-
-import ConsumerDashboard from '@/pages/ConsumerDashboard';
-
-const router = createBrowserRouter([
-  { path: '/', Component: Home },
-  { path: '/auth', Component: Auth },
-  { path: '/consumer/dashboard', Component: ConsumerDashboard},
-]);
+import Orders from '@/pages/Orders';
+import RootLayout from '@/pages/RootLayout';
+import ConsumerDashboard from './pages/ConsumerDashboard';
 
 function App() {
-  return <RouterProvider router={router} />;
+  return (
+    <BrowserRouter>
+      <Routes>
+        <Route path="/" Component={RootLayout}>
+          <Route index Component={Home} />
+
+          <Route path="dashboard" Component={ConsumerDashboard} />
+          <Route path="orders" Component={Orders} />
+          <Route path="*" Component={NotFound} />
+        </Route>
+      </Routes>
+    </BrowserRouter>
+  );
 }
 
 export default App;

@@ -1,3 +1,19 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+@layer base {
+  :root {
+    --background-primary: #fcfbf4;
+    --background-secondary: #fcebcf;
+    --accent-primary: #fc7f58;
+    --accent-secondary: #75a9dd;
+    --text-primary: #1d1d1d;
+    --text-secondary: #908c8b;
+  }
+
+  html,
+  body {
+    @apply bg-background-primary text-text-primary;
+  }
+}
