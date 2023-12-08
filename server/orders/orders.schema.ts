@@ -14,6 +14,10 @@ const orderSchema = new mongoose.Schema(
       type: mongoose.Schema.Types.ObjectId,
       required: [true, "Please enter seller"],
     },
+    serviceDate: {
+      type: Date,
+      required: [true, "Please enter service date"],
+    },
     address: {
       type: String,
       required: [true, "Please enter address"],
@@ -29,7 +33,6 @@ const orderSchema = new mongoose.Schema(
     },
     status: {
       type: String,
-      required: [true, "Please enter status"],
       enum: {
         values: ["Pending", "Completed", "Refunded"],
         message: "Please select correct status for order",
@@ -61,10 +64,11 @@ export type OrderType = {
   seller: string;
   address: string;
   amount: number;
-  status: string;
-  paymentHash: string;
-  paidAt: Date;
-  completedAt: Date;
-  isAccepted: boolean;
-  createdAt: Date;
+  status?: string;
+  paymentHash?: string;
+  paidAt?: Date;
+  completedAt?: Date;
+  isAccepted?: boolean;
+  createdAt?: Date;
+  serviceDate: Date;
 };
