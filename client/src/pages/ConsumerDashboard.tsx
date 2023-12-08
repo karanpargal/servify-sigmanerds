@@ -1,6 +1,8 @@
 import React from 'react';
 import TimelineCard from '@/components/TimelineCard';
-import ConsumerOrdersTable from '@/components/ConsumerOrdersTable';
+
+import FrequentOrdersCard from '@/components/FrequentOrdersCard';
+import RecommendedServiceCard from '@/components/RecommendedServiceCard';
 
 const ConsumerDashboard = () => {
   return (
@@ -9,12 +11,17 @@ const ConsumerDashboard = () => {
         <div className="flex flex-col-2 m-20  ">
 
           <div className="flex flex-col flex-1 w-full pr-12">
-            <div className=" flex flex-row border  ">
-              explore the services
+            <div className=" flex flex-row border pl-10 gap-x-8 p-10">
+             <RecommendedServiceCard/>
+             <RecommendedServiceCard/>
+             <RecommendedServiceCard/>
             </div>
 
-            <div className=" flex flex-row border  ">
-              <ConsumerOrdersTable/>
+            <div className=" flex flex-col border pl-10 mt-10 p-10 ">
+                <h1>Frequently Ordered Services</h1>
+              <FrequentOrdersCard/>
+              <FrequentOrdersCard/>
+              <FrequentOrdersCard/>
             </div>
           </div>
 
