@@ -16,6 +16,22 @@ module.exports = {
       },
     },
     extend: {
+      colors: {
+        background: {
+          primary: 'var(--background-primary)',
+          secondary: 'var(--background-secondary)',
+        },
+        accent: {
+          primary: 'var(--accent-primary)',
+          secondary: 'var(--accent-secondary)',
+        },
+
+        text: {
+          primary: 'var(--text-primary)',
+          secondary: 'var(--text-secondary)',
+        },
+      },
+
       keyframes: {
         'accordion-down': {
           from: { height: 0 },
