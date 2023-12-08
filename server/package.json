@@ -1,7 +1,7 @@
 {
-  "name": "test-repo",
+  "name": "server",
   "version": "1.0.0",
-  "description": "Test Repo",
+  "description": "server",
   "main": "index.ts",
   "scripts": {
     "build": "tsc",
