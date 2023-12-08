@@ -1,10 +1,11 @@
-import express, { type Express, type Request, type Response } from "express";
-import { config as DotenvConfig } from "dotenv";
-import { connectDB } from "./utils/connectDB";
 import cors from "cors";
-import userRouter from "./users/users.routes";
-import serviceRouter from "./services/services.routes";
+import { config as DotenvConfig } from "dotenv";
+import express, { type Express, type Request, type Response } from "express";
 import orderRouter from "./orders/orders.routes";
+import paymentsRouter from "./payments/payments.routes";
+import serviceRouter from "./services/services.routes";
+import userRouter from "./users/users.routes";
+import { connectDB } from "./utils/connectDB";
 DotenvConfig();
 connectDB();
 
@@ -16,9 +17,10 @@ app.use(express.json());
 app.use("/api/v1/users", userRouter);
 app.use("/api/v1/services", serviceRouter);
 app.use("/api/v1/orders", orderRouter);
+app.use("/api/v1/payments", paymentsRouter);
 
 app.get("/", (req: Request, res: Response) => {
-  res.send("Hello World");
+  res.send("Welcome to V1 API of our project");
 });
 
 app.use("*", (req: Request, res: Response) => {

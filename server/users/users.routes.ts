@@ -1,11 +1,11 @@
-import e, { Router } from "express";
 import type { Request, Response } from "express";
+import { Router } from "express";
 import {
   createUser,
+  deleteUser,
   getUser,
   getUsers,
   updateUser,
-  deleteUser,
 } from "./users.service";
 
 const userRouter = Router();

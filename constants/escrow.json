@@ -1,50 +1,6 @@
 {
-  "contractAddress": "0x25Bb7EB5AbcE2B2245Ac2E5dDD3988765f624FE5",
+  "contractAddress": "0xC434c7be548A31fb8dA76f0CC3Cf25e51166B039",
   "abi": [
-    {
-      "inputs": [
-        {
-          "internalType": "bytes32",
-          "name": "orderId",
-          "type": "bytes32"
-        }
-      ],
-      "name": "completeTransaction",
-      "outputs": [],
-      "stateMutability": "nonpayable",
-      "type": "function"
-    },
-    {
-      "inputs": [
-        {
-          "internalType": "bytes32",
-          "name": "orderId",
-          "type": "bytes32"
-        },
-        {
-          "internalType": "address",
-          "name": "_seller",
-          "type": "address"
-        }
-      ],
-      "name": "createOrder",
-      "outputs": [],
-      "stateMutability": "nonpayable",
-      "type": "function"
-    },
-    {
-      "inputs": [
-        {
-          "internalType": "bytes32",
-          "name": "orderId",
-          "type": "bytes32"
-        }
-      ],
-      "name": "depositFunds",
-      "outputs": [],
-      "stateMutability": "payable",
-      "type": "function"
-    },
     {
       "inputs": [
         {
@@ -61,9 +17,9 @@
       "inputs": [
         {
           "indexed": false,
-          "internalType": "bytes32",
+          "internalType": "string",
           "name": "orderId",
-          "type": "bytes32"
+          "type": "string"
         },
         {
           "indexed": true,
@@ -82,26 +38,13 @@
       "type": "event"
     },
     {
-      "inputs": [
-        {
-          "internalType": "bytes32",
-          "name": "orderId",
-          "type": "bytes32"
-        }
-      ],
-      "name": "refundTransaction",
-      "outputs": [],
-      "stateMutability": "nonpayable",
-      "type": "function"
-    },
-    {
       "anonymous": false,
       "inputs": [
         {
           "indexed": false,
-          "internalType": "bytes32",
+          "internalType": "string",
           "name": "orderId",
-          "type": "bytes32"
+          "type": "string"
         }
       ],
       "name": "TransactionCompleted",
@@ -112,9 +55,9 @@
       "inputs": [
         {
           "indexed": false,
-          "internalType": "bytes32",
+          "internalType": "string",
           "name": "orderId",
-          "type": "bytes32"
+          "type": "string"
         }
       ],
       "name": "TransactionRefunded",
@@ -136,9 +79,53 @@
     {
       "inputs": [
         {
-          "internalType": "bytes32",
+          "internalType": "string",
+          "name": "orderId",
+          "type": "string"
+        }
+      ],
+      "name": "completeTransaction",
+      "outputs": [],
+      "stateMutability": "nonpayable",
+      "type": "function"
+    },
+    {
+      "inputs": [
+        {
+          "internalType": "string",
+          "name": "orderId",
+          "type": "string"
+        },
+        {
+          "internalType": "address",
+          "name": "_seller",
+          "type": "address"
+        }
+      ],
+      "name": "createOrder",
+      "outputs": [],
+      "stateMutability": "nonpayable",
+      "type": "function"
+    },
+    {
+      "inputs": [
+        {
+          "internalType": "string",
+          "name": "orderId",
+          "type": "string"
+        }
+      ],
+      "name": "depositFunds",
+      "outputs": [],
+      "stateMutability": "payable",
+      "type": "function"
+    },
+    {
+      "inputs": [
+        {
+          "internalType": "string",
           "name": "",
-          "type": "bytes32"
+          "type": "string"
         }
       ],
       "name": "orders",
@@ -165,6 +152,19 @@
         }
       ],
       "stateMutability": "view",
+      "type": "function"
+    },
+    {
+      "inputs": [
+        {
+          "internalType": "string",
+          "name": "orderId",
+          "type": "string"
+        }
+      ],
+      "name": "refundTransaction",
+      "outputs": [],
+      "stateMutability": "nonpayable",
       "type": "function"
     }
   ]
