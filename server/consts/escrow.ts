@@ -1,0 +1,170 @@
+export const escrowContractAddress =
+  "0xC434c7be548A31fb8dA76f0CC3Cf25e51166B039";
+export const escrowContractABI = [
+  {
+    inputs: [
+      {
+        internalType: "address",
+        name: "_arbiter",
+        type: "address",
+      },
+    ],
+    stateMutability: "nonpayable",
+    type: "constructor",
+  },
+  {
+    anonymous: false,
+    inputs: [
+      {
+        indexed: false,
+        internalType: "string",
+        name: "orderId",
+        type: "string",
+      },
+      {
+        indexed: true,
+        internalType: "address",
+        name: "depositor",
+        type: "address",
+      },
+      {
+        indexed: false,
+        internalType: "uint256",
+        name: "amount",
+        type: "uint256",
+      },
+    ],
+    name: "FundsDeposited",
+    type: "event",
+  },
+  {
+    anonymous: false,
+    inputs: [
+      {
+        indexed: false,
+        internalType: "string",
+        name: "orderId",
+        type: "string",
+      },
+    ],
+    name: "TransactionCompleted",
+    type: "event",
+  },
+  {
+    anonymous: false,
+    inputs: [
+      {
+        indexed: false,
+        internalType: "string",
+        name: "orderId",
+        type: "string",
+      },
+    ],
+    name: "TransactionRefunded",
+    type: "event",
+  },
+  {
+    inputs: [],
+    name: "arbiter",
+    outputs: [
+      {
+        internalType: "address",
+        name: "",
+        type: "address",
+      },
+    ],
+    stateMutability: "view",
+    type: "function",
+  },
+  {
+    inputs: [
+      {
+        internalType: "string",
+        name: "orderId",
+        type: "string",
+      },
+    ],
+    name: "completeTransaction",
+    outputs: [],
+    stateMutability: "nonpayable",
+    type: "function",
+  },
+  {
+    inputs: [
+      {
+        internalType: "string",
+        name: "orderId",
+        type: "string",
+      },
+      {
+        internalType: "address",
+        name: "_seller",
+        type: "address",
+      },
+    ],
+    name: "createOrder",
+    outputs: [],
+    stateMutability: "nonpayable",
+    type: "function",
+  },
+  {
+    inputs: [
+      {
+        internalType: "string",
+        name: "orderId",
+        type: "string",
+      },
+    ],
+    name: "depositFunds",
+    outputs: [],
+    stateMutability: "payable",
+    type: "function",
+  },
+  {
+    inputs: [
+      {
+        internalType: "string",
+        name: "",
+        type: "string",
+      },
+    ],
+    name: "orders",
+    outputs: [
+      {
+        internalType: "address",
+        name: "buyer",
+        type: "address",
+      },
+      {
+        internalType: "address",
+        name: "seller",
+        type: "address",
+      },
+      {
+        internalType: "enum Escrow.State",
+        name: "state",
+        type: "uint8",
+      },
+      {
+        internalType: "uint256",
+        name: "amount",
+        type: "uint256",
+      },
+    ],
+    stateMutability: "view",
+    type: "function",
+  },
+  {
+    inputs: [
+      {
+        internalType: "string",
+        name: "orderId",
+        type: "string",
+      },
+    ],
+    name: "refundTransaction",
+    outputs: [],
+    stateMutability: "nonpayable",
+    type: "function",
+  },
+];
