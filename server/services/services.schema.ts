@@ -1,4 +1,4 @@
-import mongoose, { mongo } from "mongoose";
+import mongoose from "mongoose";
 
 const serviceSchema = new mongoose.Schema({
   name: {
@@ -76,15 +76,15 @@ export type ServiceType = {
   name: string;
   price: number;
   description: string;
-  ratings: number;
+  ratings?: number;
   category: string;
   seller: mongoose.Schema.Types.ObjectId;
-  numOfReviews: number;
-  reviews: {
+  numOfReviews?: number;
+  reviews?: {
     user: mongoose.Schema.Types.ObjectId;
     rating: number;
     comment: string;
   }[];
-  isActive: boolean;
+  isActive?: boolean;
   createdAt: Date;
 };
