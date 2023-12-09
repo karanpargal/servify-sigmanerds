@@ -36,7 +36,7 @@ export default function Dashboard() {
                     _id: service.seller._id,
                     name: service.seller.name,
                   },
-                  reviews: service.reviews || [],
+                  reviews: [],
                 }}
               />
             ))}

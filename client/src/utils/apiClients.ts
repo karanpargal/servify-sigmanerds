@@ -2,7 +2,7 @@ import axios from 'axios';
 import type { ServiceClientType } from '../../../server/services/services.schema';
 import type { UserClientType } from '../../../server/users/users.schema';
 
-const axiosClient = axios.create({
+export const axiosClient = axios.create({
   baseURL: 'http://localhost:8080/api/v1/',
 });
 
@@ -16,3 +16,6 @@ export const fetchProviderServiceListing = ({ uid }: { uid: string }) =>
 
 export const fetchCustomerServiceListing = () =>
   axiosClient.get<ServiceClientType[]>(`/services/`).then((res) => res.data);
+
+export const fetchServiceById = ({ id }: { id: string }) =>
+  axiosClient.get<ServiceClientType>(`/services/${id}`).then((res) => res.data);

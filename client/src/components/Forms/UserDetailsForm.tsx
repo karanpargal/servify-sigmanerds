@@ -1,6 +1,7 @@
 import { LogInWithAnonAadhaar, useAnonAadhaar } from 'anon-aadhaar-react';
 
 import useWallet from '@/hooks/useWallet';
+import { useQueryClient } from '@tanstack/react-query';
 import axios from 'axios';
 import { useFormik } from 'formik';
 import { useEffect } from 'react';
@@ -44,6 +45,8 @@ export default function UserDetailsForm() {
   const { address: walletAddress } = useWallet();
   const { toast } = useToast();
 
+  const queryClient = useQueryClient();
+
   useEffect(() => {
     if (anonAadhaar.status === 'logged-in') {
       formik.setFieldValue('anonAadhaarLoggedIn', true);
@@ -74,8 +77,8 @@ export default function UserDetailsForm() {
           addresses: [values.address],
           walletAddress: walletAddress,
         })
-        .then((data) => {
-          console.log(data);
+        .then(() => {
+          queryClient.invalidateQueries({ queryKey: ['user', walletAddress] });
         })
         .finally(() => {
           toast({

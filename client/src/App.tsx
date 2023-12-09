@@ -10,7 +10,7 @@ import Dashboard from '@/pages/Dashboard';
 import Home from '@/pages/Home';
 import Onboarding from '@/pages/Onboarding';
 import Orders from '@/pages/Orders';
-import BookService from './pages/BookService';
+import ServiceDetails from './pages/ServiceDetails';
 
 import { ChatUIProvider, ENV, lightChatTheme } from '@pushprotocol/uiweb';
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
@@ -36,7 +36,6 @@ function App() {
               path="/"
               element={isConnected ? <Navigate to="/dashboard" /> : <Home />}
             />
-            <Route path="book-service" Component={BookService} />
             <Route
               path="/"
               element={
@@ -50,11 +49,12 @@ function App() {
               <Route element={<OnboardedRoute />}>
                 <Route path="dashboard" Component={Dashboard} />
                 <Route path="orders" Component={Orders} />
-                <Route path="account" Component={Accounts} />
-
                 <Route path="chats" Component={ChatLayout}>
                   <Route path=":chatId" Component={ChatView} />
                 </Route>
+                <Route path="account" Component={Accounts} />
+
+                <Route path="services/:id" Component={ServiceDetails} />
               </Route>
             </Route>
             {/* Catch all route */}

@@ -1,4 +1,5 @@
 import useUserData from '@/hooks/useUserData';
+import { cn } from '@/utils';
 import { motion } from 'framer-motion';
 import { NavLink, useOutlet } from 'react-router-dom';
 
@@ -7,8 +8,13 @@ export default function ChatLayout() {
   const { data: userData } = useUserData();
 
   return (
-    <main className="grid min-h-[90vh] grid-cols-[auto_1fr] gap-6 p-6">
-      <aside className="min-w-[200px] rounded-xl bg-background-secondary py-4">
+    <main
+      className={cn(
+        'grid min-h-[90vh] justify-items-center gap-6 p-6',
+        outlet ? 'grid-cols-[auto_1fr]' : 'grid-cols-1',
+      )}
+    >
+      <aside className="w-full min-w-[200px] max-w-lg rounded-xl bg-background-secondary py-4">
         {userData?.preference === 'provider' && (
           <>
             <ChatCard

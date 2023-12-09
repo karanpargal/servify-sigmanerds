@@ -21,7 +21,6 @@ const userSchema = new mongoose.Schema({
   },
   bio: {
     type: String,
-    required: [true, "Please provide a bio"],
   },
   preference: {
     type: String,
