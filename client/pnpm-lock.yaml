@@ -72,7 +72,7 @@ dependencies:
     specifier: ^1.11.10
     version: 1.11.10
   ethers:
-    specifier: ^5.7
+    specifier: ^5.7.2
     version: 5.7.2
   formik:
     specifier: ^2.4.5

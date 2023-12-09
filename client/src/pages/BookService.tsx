@@ -3,6 +3,8 @@ import useUserData from '@/hooks/useUserData';
 import axios from 'axios';
 import { useState } from 'react';
 import { useLocation, useNavigate } from 'react-router-dom';
+import { useContractWrite } from 'wagmi';
+import { escrowContractABI } from '../../../server/consts/escrow';
 
 type Service = {
   _id: string;
@@ -29,6 +31,11 @@ const BookService = () => {
   const { service } = location.state as { service: Service };
   const [serviceDate, setServiceDate] = useState('');
   const [address, setAddress] = useState('');
+  const { data: contractData, write } = useContractWrite({
+    address: '0xC434c7be548A31fb8dA76f0CC3Cf25e51166B039',
+    abi: escrowContractABI,
+    functionName: 'depositFunds',
+  });
 
   console.log(service);
   const handleBack = () => {
@@ -36,18 +43,23 @@ const BookService = () => {
   };
 
   const handleBooking = async () => {
-    const response = await axios.post(
-      `${process.env.REACT_APP_API_URL}/api/v1/orders`,
-      {
-        consumer: userData?._id,
-        service: service._id,
-        seller: service.provider._id,
-        address: address,
-        amount: service.price,
-        serviceDate: serviceDate,
-      },
-    );
-    console.log(response.data);
+    const response = await axios.post(`http://localhost:8080/api/v1/orders`, {
+      consumer: userData?._id,
+      service: service._id,
+      seller: service.provider._id,
+      address: address,
+      amount: service.price,
+      serviceDate: serviceDate,
+    });
+
+    const weiValue = 0.0000051 * service.price * 1000000000000000000;
+
+    const tx = write({
+      args: [response.data._id],
+      value: BigInt(weiValue),
+    });
+
+    console.log(response.data, contractData, tx);
   };
 
   return (
