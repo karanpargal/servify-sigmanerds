@@ -24,6 +24,9 @@ To address this issue, we propose the creation of Servify, a platform designed t
 ## 🧠 Knowledge Primer
 
  - **Anon Aadhaar** is a zero-knowledge protocol that allows Aadhaar ID owners to prove their identity in a privacy preserving way. It provides a set of tools to generate and verify proofs, authenticate users and verify proofs on-chain.
+ - **Scroll** is a Layer 2 blockchain platform that aims to scale Ethereum by processing transactions off-chain and then committing them to the main Ethereum chain. It utilizes zero-knowledge proofs (ZKPs) to verify the validity of these off-chain transactions without revealing the underlying data, ensuring scalability, privacy, and security.
+
+
 
 ## 🚩 What Problems Servify Solves
  - **Lack of a Centralized Hub:** The absence of a centralized platform for local services with verified credibility creates difficulties for individuals looking to connect with reliable service providers within their communities.
