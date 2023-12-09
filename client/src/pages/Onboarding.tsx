@@ -22,11 +22,12 @@ import {
   SelectValue,
 } from '@/components/ui/select';
 import { Switch } from '@/components/ui/switch';
+import axios from 'axios';
 import { Formik } from 'formik';
 import * as Yup from 'yup';
 
 export default function Onboarding() {
-  const { disconnect } = useWallet();
+  const { disconnect, address: walletAddress } = useWallet();
 
   const SignInSchema = Yup.object().shape({
     name: Yup.string()
@@ -41,14 +42,12 @@ export default function Onboarding() {
       .min(15, 'Minimmun Age should be 15'),
 
     bio: Yup.string().min(10, 'Too short!'),
-    sex: Yup.boolean()
-    .required('Specify Your gender'),
+    sex: Yup.boolean().required('Specify Your gender'),
 
     address: Yup.string()
-    .min(10, 'Too Short!')
-    .max(50, 'Too Long!')
-    .required('Address is required'),
-
+      .min(10, 'Too Short!')
+      .max(50, 'Too Long!')
+      .required('Address is required'),
   });
   return (
     <main>
@@ -64,10 +63,27 @@ export default function Onboarding() {
         }}
         validationSchema={SignInSchema}
         onSubmit={(values, { setSubmitting }) => {
-          setTimeout(() => {
-            alert(JSON.stringify(values, null, 2));
-            setSubmitting(false);
-          }, 400);
+          console.log('Hey');
+          axios
+            .post(`${process.env.REACT_APP_API_URL}/api/v1/users`, {
+              name: values.name,
+              email: values.email,
+              age: values.age,
+              sex: values.sex,
+              bio: values.bio,
+              preference: values.preference,
+              address: values.address,
+              walletAddress: walletAddress,
+            })
+            .then(() => {
+              alert('Details Submitted');
+            })
+            .catch((error) => {
+              console.error('Error submitting form:', error);
+            })
+            .finally(() => {
+              setSubmitting(false);
+            });
         }}
       >
         {({
@@ -118,7 +134,6 @@ export default function Onboarding() {
                     <SelectItem value="Female">Female</SelectItem>
                     <SelectItem value="Male">Male</SelectItem>
                     <SelectItem value="Non-binary">Non-Binary</SelectItem>
-                    
                   </SelectGroup>
                 </SelectContent>
               </Select>
