@@ -1,6 +1,7 @@
 import cors from "cors";
 import { config as DotenvConfig } from "dotenv";
 import express, { type Express, type Request, type Response } from "express";
+import chatRouter from "./chats/chat.routes";
 import notificationRouter from "./notifications/notifications.routes";
 import orderRouter from "./orders/orders.routes";
 import paymentsRouter from "./payments/payments.routes";
@@ -20,6 +21,7 @@ app.use("/api/v1/services", serviceRouter);
 app.use("/api/v1/orders", orderRouter);
 app.use("/api/v1/payments", paymentsRouter);
 app.use("/api/v1/notifications", notificationRouter);
+app.use("/api/v1/chats", chatRouter);
 
 app.get("/", (req: Request, res: Response) => {
   res.send("Welcome to V1 API of our project");
