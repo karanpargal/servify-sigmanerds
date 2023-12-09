@@ -1,4 +1,5 @@
 import useUserData from '@/hooks/useUserData';
+import SuppportChat from '@/pages/SuppportChat';
 import { cn } from '@/utils';
 import { motion } from 'framer-motion';
 import { NavLink, Outlet } from 'react-router-dom';
@@ -109,6 +110,7 @@ export default function RootLayout() {
       </header>
 
       <Outlet />
+      <SuppportChat />
     </div>
   );
 }
