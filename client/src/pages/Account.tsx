@@ -51,55 +51,53 @@ const Accounts = () => {
 
   return (
     <div className="container w-1/2">
-      <div className="mt-8 flex justify-center">
-        <div className=" flex-row rounded-xl border  bg-background-secondary p-4 pb-8">
-          <div>
-            <ProfileCard />
+      <div className=" bg-background-secondary rounded-xl  border p-4 pb-8 mt-8">
+        <div>
+          <ProfileCard />
+        </div>
+
+        <div className="grid grid-rows-3 place-self-stretch">
+          <div className=" m-4 grid grid-cols-2  ">
+            <div>
+              <PastOrdersCard />
+            </div>
+            <div>
+              <HelpAndSupport />
+            </div>
           </div>
-
-          <div className="grid grid-rows-3">
-            <div className=" m-4 grid grid-cols-2 justify-between ">
-              <div>
-                <PastOrdersCard />
-              </div>
-              <div>
-                <HelpAndSupport />
-              </div>
+          <div className="m-4 mt-6 grid grid-cols-2  ">
+            <div>
+              <ManageAccounts />
             </div>
-            <div className="m-4 mt-6 grid grid-cols-2 justify-between ">
-              <div>
-                <ManageAccounts />
-              </div>
-              <div>
-                <Settings />
-              </div>
-            </div>
-
-            <div className="m-4 mt-10 grid grid-cols-2 justify-between ">
-              <Footer />
-              <Button
-                className="w-1/2 bg-red-600 hover:bg-red-400"
-                onClick={() => {
-                  disconnect();
-                }}
-              >
-                <span>Log Out</span>
-              </Button>
+            <div>
+              <Settings />
             </div>
           </div>
 
-          <div className="mr-10 mt-10 flex flex-row justify-center gap-4">
+          <div className="m-4 mt-10 grid grid-cols-2  ">
+            <Footer />
             <Button
-              className="rounded-lg p-4 px-8 py-6 text-xl"
+              className="w-1/2 bg-red-600 hover:bg-red-400"
               onClick={() => {
-                handleChangePref();
+                disconnect();
               }}
             >
-              {userData?.preference === 'provider'
-                ? 'Only consume services'
-                : 'Provide services'}
+              <span>Log Out</span>
             </Button>
           </div>
+        </div>
+
+        <div className="mr-10 mt-10 flex flex-row justify-center gap-4">
+          <Button
+            className="rounded-lg p-4 px-8 py-6 text-xl"
+            onClick={() => {
+              handleChangePref();
+            }}
+          >
+            {userData?.preference === 'provider'
+              ? 'Consume services'
+              : 'Provide services'}
+          </Button>
         </div>
       </div>
     </div>

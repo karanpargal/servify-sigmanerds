@@ -54,7 +54,7 @@ const ManageAccounts = () => {
   return (
     <div>
       <div
-        className="mr-1 flex flex-row items-center gap-2"
+        className=" flex flex-row gap-2"
         onClick={openModal}
       >
         <div className="flex">

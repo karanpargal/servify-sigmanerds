@@ -9,7 +9,7 @@ const ProfileCard = () => {
   return (
     <div>
       <div className="font-inter mt-4 flex justify-center">
-        <div className="flex w-[600px] flex-row items-center justify-between gap-x-2 p-10  ">
+        <div className="flex w-[600px] flex-row items-center justify-between gap-x-10 p-10  ">
           <div className="flex flex-col">
             <HeroIcons.UserCircleIcon className="h-20 w-20" />
           </div>
