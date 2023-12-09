@@ -23,7 +23,9 @@ To address this issue, we propose the creation of Servify, a platform designed t
 
 ## 🧠 Knowledge Primer
 
- - **Anon Aadhaar** empowers Aadhaar ID holders to prove their identity without revealing any personal information. It provides tools for generating proofs, verifying users, and confirming proofs on the blockchain, ensuring privacy and security.
+ - **Anon Aadhaar** is a zero-knowledge protocol that allows Aadhaar ID owners to prove their identity in a privacy preserving way. It provides a set of tools to generate and verify proofs, authenticate users and verify proofs on-chain.
+
+
 
 ## 🚩 What Problems Servify Solves
  - **Lack of a Centralized Hub:** The absence of a centralized platform for local services with verified credibility creates difficulties for individuals looking to connect with reliable service providers within their communities.
