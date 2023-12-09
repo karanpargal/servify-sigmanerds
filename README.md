@@ -1,7 +1,8 @@
+![Hero](repository-assets/hero.png)
 # Servify by SigmaNerds
 Built with ☕ and ❤️ at [ETHIndia 2023](https://ethindia.co/).
 
-## Table of Contents
+## 📝 Table of Contents
  - Goals
  - Knowledge Primer
  - Preview
