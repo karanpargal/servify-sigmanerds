@@ -41,39 +41,75 @@ Servify addresses these challenges by leveraging Anon Aadhaar verification to cr
 
 ## 💻 Technology Stack
 
-| Blockchain ⛓️ | Backend 🛠️ | Frontend ✨ |
-| :---: | :---: | :---: |
-| Solidity | Node | React |
-| Scroll | Express | TypeScript |
-| Base | TypeScript | Formik |
-|   |   | Yep |
-|   |   | Framer Motion |
+| Blockchain ⛓️ | Backend 🛠️ | Frontend ✨ | Protocols |
+| :---: | :---: | :---: | :---: |
+| Solidity | Node | React | Anon Aadhar |
+| Scroll | Express | TypeScript | Push Protocol |
+| Base | TypeScript | Formik |   |
+|   |   | Yep |   |
+|   |   | Framer Motion |   |
 
 ## 📐 Architecture
+![Architecture](repository-assets/Architecture.png)
 
 ## 👔 Emphasis on Tracks
 
 ### Ethereum Foundation: Anon Aadhar
  - **Usage**: Anon Aadhar is being utilised as proof of citizenship and identity in Servify, to maintain anonimity while provisioning credibility.
- - **Implementation**: Anon Aadhaar utilizes ZK-SNARKs, a type of zero-knowledge proof, to enable users to prove their identity without disclosing their actual Aadhaar number or any other personal details. This ensures that sensitive information remains completely confidential. Users can generate anonymized proofs using their Aadhaar card and a mobile application or web interface. These proofs contain cryptographic data that can be used to verify the user's identity without revealing any underlying information.Organizations or individuals can verify the validity of an Anon Aadhaar proof using a verifier app or service. The verifier app interacts with the blockchain to confirm the proof's authenticity and ensure the user's identity is valid.
+ - **Implementation**:
 
+**React context provider Anon Aadhaar**
 
+```
+ReactDOM.createRoot(document.getElementById('root')!).render(
+  <React.StrictMode>
+    <WagmiConfig config={wagmiConfig}>
+      <RainbowKitProvider chains={chains}>
+        <AnonAadhaarProvider _appId={ANON_AADHAAR_APP_ID}>
+          <App />
+        </AnonAadhaarProvider>
+      </RainbowKitProvider>
+    </WagmiConfig>
+  </React.StrictMode>,
+);
+```
+**Consuming Anon Aadhar Validation into our Custom Forms**
+``` 
+const [anonAadhaar] = useAnonAadhaar();
+  useEffect(() => {
+    if (anonAadhaar.status === 'logged-in') {
+      formik.setFieldValue('anonAadhaarLoggedIn', true);
+    }
+  }, [anonAadhaar]);
+```
+```
+<div className="mb-6">
+        <Label>Verify your identity with Anon Aadhaar</Label>
+        <LogInWithAnonAadhaar />
+        ...
+```
 
 ### Push Protocol
- - **Usage**: Push Protocol is a decentralized notification protocol built on Ethereum blockchain.
- - **Implementation**: Servify is using **Support Chat** to offer real-time chat support to the users directly, eliminating the need for users to switch to external platforms, creating a seamless and convenient experience. **P2P Chat** facilitates secure and decentralized peer-to-peer communication between users without the need for centralized servers and intermediaries, ensuring privacy and data ownership. Servify uses **Token Gated Chat** restricting access to specific groups of users based on their token ownership. This enables the creation of exclusive communities for high-value users, fostering deeper engagement and loyalty. **Push Notification** enables Servify to send real-time notifications to users' wallets or mobile devices, keeping them informed about important events, updates, and reminders.
+ - **Usage**:
+   - **Support Chat**: Used for offering real-time chat support to the users directly, eliminating the need for users to switch to external platforms, creating a seamless and convenient experience.
+   - **P2P Chat:** To facilitate secure and decentralized peer-to-peer communication between users without the need for centralized servers and intermediaries, ensuring privacy and data ownership.
+   - **Token Gated Chat:** Used for restricting access to specific groups of users based on their token ownership. This enables the creation of exclusive communities for high-value users, fostering deeper engagement and loyalty.
+   - **Push Notification:** This enables Servify to send real-time notifications to users' wallets or mobile devices, keeping them informed about important events, updates, and reminders.
+ - **Implementation**: Code with the implementation of Push Protocol is housed in `server/notifications/notifications.service.ts`. [Link](https://github.com/karanpargal/sigmanerds/blob/main/server/notifications/notifications.service.ts)
 
 
 ### Scroll
- - **Usage**:
+ - **Usage**: Contracts pertaining to Servify are deployed on Scroll.
  - **Implementation**: Sepolia Testnet Explorer on https://sepolia.scrollscan.com/
    - SBT on Scroll: `0x189D6807030b09D86CA4c61c8bfE22DDcA4A682E` [Link](https://sepolia.scrollscan.com/address/0x189D6807030b09D86CA4c61c8bfE22DDcA4A682E)
    - Escrow on Scroll: `0x25Bb7EB5AbcE2B2245Ac2E5dDD3988765f624FE5` [Link](https://sepolia.scrollscan.com/address/0x25bb7eb5abce2b2245ac2e5ddd3988765f624fe5)
 
 
 ## 💪 Challenges Faced (and WAGMI!)
-- **Developer Experience of SDKs**: Inadequate or unclear documentation did significantly hinder our developer experience because as developers, we rely heavily on documentation to understand how to use the SDK effectively.
-- **Figuring out the Settlement Flow**: A significant challenge we encountered was optimizing the settlement flow, especially in cases where users were dissatisfied with the service provided. Balancing flexibility for both users and providers presented a nuanced trade-off. Ultimately, we resolved this by implementing a support chat feature. This solution aimed to address user concerns efficiently, allowing for real-time communication and issue resolution. The introduction of the support chat provided a streamlined approach to handle disputes or dissatisfaction, promoting a user-centric and responsive system for dispute resolution within the service.
+- **Developer Experience of SDKs**: Inadequate or unclear documentation did significantly hinder our developer experience as implementation was difficult in the given duration with limited support.
+- **Figuring out the Settlement Flow**: Another challenge we encountered was optimizing the settlement flow, especially in cases where users were dissatisfied with the service provided. Balancing flexibility for both users and providers presented a nuanced trade-off. 
+  - Ultimately, we resolved this by implementing a support chat feature. This solution aimed to address user concerns efficiently, allowing for real-time communication and issue resolution. 
+  - The introduction of the support chat provided a streamlined approach to handle disputes or dissatisfaction, promoting a user-centric and responsive system for dispute resolution within the service.
 
 ## ⏭️ What's Next
 
