@@ -106,7 +106,7 @@ export default function UserDetailsForm() {
         <div className="space-y-1">
           <Label htmlFor="age">Age</Label>
           <Input
-            type="age"
+            type="number"
             name="age"
             onChange={formik.handleChange}
             onBlur={formik.handleBlur}
@@ -142,7 +142,7 @@ export default function UserDetailsForm() {
             Bio <em className="font-light">(optional)</em>
           </Label>
           <Input
-            type="bio"
+            type="text"
             name="bio"
             onChange={formik.handleChange}
             onBlur={formik.handleBlur}
@@ -175,7 +175,7 @@ export default function UserDetailsForm() {
           <Label htmlFor="address">Address</Label>
           <Input
             required
-            type="address"
+            type="text"
             name="address"
             className="flex"
             onChange={formik.handleChange}

@@ -1,119 +1,146 @@
-import { Label } from '@radix-ui/react-label';
-import { Formik } from 'formik';
+import { useFormik } from 'formik';
 import * as Yup from 'yup';
+import Button from '../ui/button';
 import { Input } from '../ui/input';
+import { Label } from '../ui/label';
+import {
+  Select,
+  SelectContent,
+  SelectGroup,
+  SelectItem,
+  SelectTrigger,
+  SelectValue,
+} from '../ui/select';
 import { Textarea } from '../ui/textarea';
 
-const ListingSchema = Yup.object().shape({
-  title: Yup.string()
-    .min(5, 'Too Short!')
-    .max(50, 'Too Long!')
-    .required('Title is required'),
+const categoryies = [
+  'Software Development',
+  'Plumbing',
+  'Electrical',
+  'Carpentry',
+  'Cleaning',
+];
 
-  thumbhnail: Yup.string().required('Thumbnail is Required'),
-
+const CreateServiceListingSchema = Yup.object().shape({
+  title: Yup.string().required('Title is required'),
+  imageUrl: Yup.string().required('Service image is Required'),
+  description: Yup.string()
+    .required('Description is required')
+    .min(50, 'Description must be atleast 50 characters long'),
   duration: Yup.number().required('Task Duration is required '),
-
   pricing: Yup.number().required('pricing is required'),
+  category: Yup.string().oneOf(categoryies).required('Category is required'),
 });
 
 export default function CreateServiceListingForm() {
+  const formik = useFormik({
+    initialValues: {
+      title: '',
+      imageUrl: '',
+      description: '',
+      duration: '',
+      pricing: '',
+      category: '',
+    },
+    validationSchema: CreateServiceListingSchema,
+    onSubmit: (values) => {
+      console.log(values);
+    },
+  });
+
   return (
-    <Formik
-      initialValues={{
-        title: '',
-        thumbnail: '',
-        description: '',
-        duration: '',
-        pricing: '',
-      }}
-      validationSchema={ListingSchema}
-      onSubmit={(values, { setSubmitting }) => {
-        setTimeout(() => {
-          alert(JSON.stringify(values, null, 2));
-          setSubmitting(false);
-        }, 400);
-      }}
-    >
-      {({
-        values,
-        errors,
-        touched,
-        handleChange,
-        handleBlur,
-        handleSubmit,
-        isSubmitting,
-        /* and other goodies */
-      }) => (
-        <form onSubmit={handleSubmit} className="mt-10">
-          <div className="m-auto flex max-w-md flex-col gap-y-5">
-            <div className="flex flex-col gap-3">
-              <Label htmlFor="title">Service Name</Label>
-              <Input
-                type="name"
-                name="title"
-                className=""
-                onChange={handleChange}
-                onBlur={handleBlur}
-                value={values.title}
-              />
-              {errors.title && touched.title && errors.title}
-            </div>
+    <form className="space-y-6">
+      <div className="space-y-1">
+        <Label htmlFor="name">Title</Label>
+        <Input
+          type="text"
+          name="title"
+          id="name"
+          onChange={formik.handleChange}
+          onBlur={formik.handleBlur}
+          value={formik.values.title}
+        />
+        {formik.errors.title && formik.touched.title && (
+          <div className="text-xs text-red-500">{formik.errors.title}</div>
+        )}
+      </div>
 
-            <div className="flex flex-col gap-3">
-              <Label htmlFor="thumbnail">Thumbnail</Label>
-              <Input
-                id="picture"
-                type="file"
-                className="flex"
-                onChange={handleChange}
-                onBlur={handleBlur}
-                value={values.thumbnail}
-              />
-              {errors.thumbnail && touched.thumbnail && errors.thumbnail}
-            </div>
-            <Label htmlFor="description">Description</Label>
-
-            <Textarea placeholder="Type your description here." />
-            {errors.description && touched.description && errors.description}
-
-            <div className="flex flex-col gap-3">
-              <Label htmlFor="duration">Duration (in hrs)</Label>
-              <Input
-                type="number"
-                name="duration"
-                className="flex"
-                onChange={handleChange}
-                onBlur={handleBlur}
-                value={values.duration}
-              />
-              {errors.duration && touched.duration && errors.duration}
-            </div>
-
-            <div className="flex flex-col gap-3">
-              <Label htmlFor="pricing">Pricing</Label>
-              <Input
-                type="number"
-                name="pricing"
-                className="flex"
-                onChange={handleChange}
-                onBlur={handleBlur}
-                value={values.pricing}
-              />
-              {errors.pricing && touched.pricing && errors.pricing}
-            </div>
-            <div className="">
-              <button
-                type="submit"
-                disabled={isSubmitting}
-                className="rounded-md border px-4 py-2"
-              >
-                Submit
-              </button>
-            </div>
+      <div className="space-y-1">
+        <Label htmlFor="description">Description</Label>
+        <Textarea
+          id="description"
+          name="description"
+          onChange={formik.handleChange}
+          onBlur={formik.handleBlur}
+          value={formik.values.description}
+        />
+        {formik.errors.description && formik.touched.description && (
+          <div className="text-xs text-red-500">
+            {formik.errors.description}
           </div>
-        </form>
-      )}
-    </Formik>
+        )}
+      </div>
+
+      <div className="space-y-1">
+        <Label htmlFor="duration">Duration</Label>
+        <Input
+          type="number"
+          name="duration"
+          id="duration"
+          onChange={formik.handleChange}
+          onBlur={formik.handleBlur}
+          value={formik.values.duration}
+        />
+        {formik.errors.duration && formik.touched.duration && (
+          <div className="text-xs text-red-500">{formik.errors.duration}</div>
+        )}
+      </div>
+      <div className="space-y-1">
+        <Label htmlFor="pricing">Pricing</Label>
+        <Input
+          type="number"
+          name="pricing"
+          id="pricing"
+          onChange={formik.handleChange}
+          onBlur={formik.handleBlur}
+          value={formik.values.pricing}
+        />
+        {formik.errors.pricing && formik.touched.pricing && (
+          <div className="text-xs text-red-500">{formik.errors.pricing}</div>
+        )}
+      </div>
+
+      <div className="space-y-1">
+        <Label htmlFor="category">Category</Label>
+        <Select
+          onValueChange={(value) => formik.setFieldValue('category', value)}
+        >
+          <SelectTrigger>
+            <SelectValue placeholder="Choose your service category" />
+          </SelectTrigger>
+          <SelectContent>
+            <SelectGroup>
+              {categoryies.map((category) => (
+                <SelectItem key={category} value={category}>
+                  {category}
+                </SelectItem>
+              ))}
+            </SelectGroup>
+          </SelectContent>
+        </Select>
+        {formik.errors.category && formik.touched.category && (
+          <div className="text-xs text-red-500">{formik.errors.category}</div>
+        )}
+      </div>
+
+      <Button
+        disabled={formik.isSubmitting}
+        type="button"
+        className="w-full rounded-md"
+        onClick={() => formik.handleSubmit()}
+      >
+        Submit
+      </Button>
+    </form>
   );
 }
