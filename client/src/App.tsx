@@ -14,7 +14,7 @@ import BookService from './pages/BookService';
 
 import { ChatUIProvider, ENV, lightChatTheme } from '@pushprotocol/uiweb';
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
-import { Navigate, Route, Routes } from 'react-router-dom';
+import { BrowserRouter, Navigate, Route, Routes } from 'react-router-dom';
 import ChatLayout from './components/shared/ChatsLayout';
 import ChatView from './pages/Chat';
 
@@ -30,35 +30,37 @@ function App() {
         env={ENV.STAGING}
         signer={walletClient}
       >
-        <Routes>
-          <Route
-            path="/"
-            element={isConnected ? <Navigate to="/dashboard" /> : <Home />}
-          />
-          <Route path="book-service" Component={BookService} />
-          <Route
-            path="/"
-            element={
-              <ProtectedRoute>
-                <RootLayout />
-              </ProtectedRoute>
-            }
-          >
-            <Route path="onboarding" Component={Onboarding} />
+        <BrowserRouter>
+          <Routes>
+            <Route
+              path="/"
+              element={isConnected ? <Navigate to="/dashboard" /> : <Home />}
+            />
+            <Route path="book-service" Component={BookService} />
+            <Route
+              path="/"
+              element={
+                <ProtectedRoute>
+                  <RootLayout />
+                </ProtectedRoute>
+              }
+            >
+              <Route path="onboarding" Component={Onboarding} />
 
-            <Route element={<OnboardedRoute />}>
-              <Route path="dashboard" Component={Dashboard} />
-              <Route path="orders" Component={Orders} />
-              <Route path="account" Component={Accounts} />
+              <Route element={<OnboardedRoute />}>
+                <Route path="dashboard" Component={Dashboard} />
+                <Route path="orders" Component={Orders} />
+                <Route path="account" Component={Accounts} />
 
-              <Route path="chats" Component={ChatLayout}>
-                <Route path=":chatId" Component={ChatView} />
+                <Route path="chats" Component={ChatLayout}>
+                  <Route path=":chatId" Component={ChatView} />
+                </Route>
               </Route>
             </Route>
-          </Route>
-          {/* Catch all route */}
-          <Route path="*" Component={NotFound} />
-        </Routes>
+            {/* Catch all route */}
+            <Route path="*" Component={NotFound} />
+          </Routes>
+        </BrowserRouter>
         <Toaster />
       </ChatUIProvider>
     </QueryClientProvider>

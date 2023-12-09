@@ -5,11 +5,25 @@
 @layer base {
   html,
   body {
-    @apply bg-background-primary font-sans text-text-primary;
+    @apply scroll bg-background-primary font-sans text-text-primary;
   }
 }
 
 @layer utilities {
+  .scroll ::-webkit-scrollbar {
+    width: 0.4em;
+    height: 0.4em;
+  }
+
+  .scroll ::-webkit-scrollbar-track {
+    all: unset;
+    padding: 8px;
+  }
+
+  .scroll ::-webkit-scrollbar-thumb {
+    @apply rounded-full bg-accent-primary/90;
+  }
+
   .anon-aadhaar-button-wrapper button {
     all: unset;
     @apply flex w-full justify-center;

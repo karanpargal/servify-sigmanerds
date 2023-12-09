@@ -3,7 +3,6 @@ import '@rainbow-me/rainbowkit/styles.css';
 import { AnonAadhaarProvider } from 'anon-aadhaar-react';
 import React from 'react';
 import ReactDOM from 'react-dom/client';
-import { BrowserRouter } from 'react-router-dom';
 import { WagmiConfig, configureChains, createConfig } from 'wagmi';
 import { scrollSepolia } from 'wagmi/chains';
 import { publicProvider } from 'wagmi/providers/public';
@@ -55,9 +54,7 @@ ReactDOM.createRoot(document.getElementById('root')!).render(
     <WagmiConfig config={wagmiConfig}>
       <RainbowKitProvider chains={chains}>
         <AnonAadhaarProvider _appId={ANON_AADHAAR_APP_ID}>
-          <BrowserRouter>
-            <App />
-          </BrowserRouter>
+          <App />
         </AnonAadhaarProvider>
       </RainbowKitProvider>
     </WagmiConfig>

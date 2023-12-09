@@ -19,7 +19,6 @@ export default function useCustomerServiceListings() {
   });
 
   const _data = data.filter((service) => {
-    // @ts-expect-error _id is not defined on type
     return service.seller._id !== user.data?._id;
   });
 

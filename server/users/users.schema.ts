@@ -39,6 +39,10 @@ const userSchema = new mongoose.Schema({
 
 export const User = mongoose.model("User", userSchema);
 
+export type UserClientType = mongoose.HydratedDocumentFromSchema<
+  typeof userSchema
+>;
+
 export type UserType = {
   name: string;
   email: string;

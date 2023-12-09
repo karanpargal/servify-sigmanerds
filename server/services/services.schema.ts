@@ -1,4 +1,5 @@
 import mongoose from "mongoose";
+import { UserClientType } from "../users/users.schema";
 
 const serviceSchema = new mongoose.Schema({
   name: {
@@ -73,6 +74,15 @@ const serviceSchema = new mongoose.Schema({
 
 export default mongoose.models.Service ||
   mongoose.model("Service", serviceSchema);
+
+export type ServiceClientType = mongoose.HydratedDocumentFromSchema<
+  typeof serviceSchema
+> & {
+  seller: UserClientType;
+  reviews: (mongoose.HydratedDocumentFromSchema<
+    typeof serviceSchema
+  >["reviews"][number] & { user: UserClientType })[];
+};
 
 export type ServiceType = {
   name: string;

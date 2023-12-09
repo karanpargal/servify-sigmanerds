@@ -6,7 +6,11 @@ import useUserData from './useUserData';
  */
 export default function useProviderServiceListings() {
   const user = useUserData();
-  const { data, isLoading, isError } = useQuery({
+  const {
+    data = [],
+    isLoading,
+    isError,
+  } = useQuery({
     queryKey: ['services', user.data?._id],
 
     // eslint-disable-next-line @typescript-eslint/no-non-null-asserted-optional-chain

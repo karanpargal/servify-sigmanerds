@@ -1,30 +1,29 @@
 import TimelineCard from '@/components/TimelineCard';
 
 import ProvidedServicesCard from '@/components/Account/ProvidedServicesCard';
-import RecommendedServiceCard from '@/components/RecommendedServiceCard';
 
+import FeaturedServices from '@/components/Dashboard/FeaturedServices';
 import useCustomerServiceListings from '@/hooks/useCustomerServiceListings';
+import useUserData from '@/hooks/useUserData';
 
 export default function Dashboard() {
-  const { data: serviceListings } = useCustomerServiceListings();
+  const user = useUserData();
+  const serviceListings = useCustomerServiceListings();
 
-  console.log(serviceListings);
+  const role = user.data?.preference ?? 'consumer';
 
   return (
     <main className="min-h-screen">
       <div className="mx-auto grid max-w-7xl grid-cols-[1fr_auto] gap-6 p-6">
         {/* Left col */}
-        <div className="space-y-6">
-          <section className="rounded-xl bg-background-secondary p-4 shadow-card">
-            <RecommendedServiceCard />
-            <RecommendedServiceCard />
-            <RecommendedServiceCard />
-          </section>
+        <div className="min-w-0 space-y-6">
+          {role === 'consumer' && <FeaturedServices />}
+          {/* {role === 'provider' && <UpcomingServiceRequest />} */}
           <section className="rounded-xl bg-background-secondary p-4 shadow-card">
             <h1 className="mb-4 text-xl font-semibold">
               Checkout available services
             </h1>
-            {serviceListings?.map((service) => (
+            {serviceListings.data.map((service) => (
               <ProvidedServicesCard
                 service={{
                   _id: service._id,

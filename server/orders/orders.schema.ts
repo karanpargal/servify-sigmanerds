@@ -1,4 +1,6 @@
 import mongoose from "mongoose";
+import { ServiceClientType } from "../services/services.schema";
+import { UserClientType } from "../users/users.schema";
 
 const orderSchema = new mongoose.Schema(
   {
@@ -60,6 +62,14 @@ const orderSchema = new mongoose.Schema(
 );
 
 export default mongoose.models.Order || mongoose.model("Order", orderSchema);
+
+export type OrderClientType = mongoose.HydratedDocumentFromSchema<
+  typeof orderSchema
+> & {
+  seller: UserClientType;
+  consumer: UserClientType;
+  service: ServiceClientType;
+};
 
 export type OrderType = {
   consumer: string;
