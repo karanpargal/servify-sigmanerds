@@ -9,7 +9,7 @@ export default function Dashboard() {
       <div className="mx-auto grid max-w-7xl grid-cols-[1fr_auto] gap-6 p-6">
         {/* Left col */}
         <div className="space-y-6">
-          <section className="flex gap-x-6 rounded-xl bg-background-secondary p-4 shadow-card">
+          <section className="rounded-xl bg-background-secondary p-4 shadow-card">
             <RecommendedServiceCard />
             <RecommendedServiceCard />
             <RecommendedServiceCard />

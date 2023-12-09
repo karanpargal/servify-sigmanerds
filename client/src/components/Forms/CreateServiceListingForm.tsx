@@ -16,7 +16,7 @@ import {
 import { Textarea } from '../ui/textarea';
 import { useToast } from '../ui/use-toast';
 
-const categoryies = [
+const categories = [
   'Software Development',
   'Plumbing',
   'Electrical',
@@ -32,7 +32,7 @@ const CreateServiceListingSchema = Yup.object().shape({
     .min(50, 'Description must be atleast 50 characters long'),
   duration: Yup.number().required('Task Duration is required '),
   pricing: Yup.number().required('pricing is required'),
-  category: Yup.string().oneOf(categoryies).required('Category is required'),
+  category: Yup.string().oneOf(categories).required('Category is required'),
 });
 
 export default function CreateServiceListingForm() {
@@ -155,7 +155,7 @@ export default function CreateServiceListingForm() {
           </SelectTrigger>
           <SelectContent>
             <SelectGroup>
-              {categoryies.map((category) => (
+              {categories.map((category) => (
                 <SelectItem key={category} value={category}>
                   {category}
                 </SelectItem>
