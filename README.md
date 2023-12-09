@@ -55,11 +55,13 @@ Servify addresses these challenges by leveraging Anon Aadhaar verification to cr
 
 ### Ethereum Foundation: Anon Aadhar
  - **Usage**: Anon Aadhar is being utilised as proof of citizenship and identity in Servify, to maintain anonimity while provisioning credibility.
- - **Implementation**: Anon-Aadhar is being used 
+ - **Implementation**: Anon Aadhaar utilizes ZK-SNARKs, a type of zero-knowledge proof, to enable users to prove their identity without disclosing their actual Aadhaar number or any other personal details. This ensures that sensitive information remains completely confidential. Users can generate anonymized proofs using their Aadhaar card and a mobile application or web interface. These proofs contain cryptographic data that can be used to verify the user's identity without revealing any underlying information.Organizations or individuals can verify the validity of an Anon Aadhaar proof using a verifier app or service. The verifier app interacts with the blockchain to confirm the proof's authenticity and ensure the user's identity is valid.
+
+
 
 ### Push Protocol
  - **Usage**: Push Protocol is a decentralized notification protocol built on Ethereum blockchain.
- - **Implementation**: Servify is using **Support Chat** to offer real-time chat support to the users directly, eliminating the need for users to switch to external platforms, creating a seamless and convenient experience. **P2P Chat** facilitates secure and decentralized peer-to-peer communication between users without the need for centralized servers and intermediaries, ensuring privacy and data ownership. Servify uses **Token Gated Chat** restricting access to specific groups of users based on their token ownership. This enables the creation of exclusive communities for high-value users, fostering deeper engagement and loyalty.
+ - **Implementation**: Servify is using **Support Chat** to offer real-time chat support to the users directly, eliminating the need for users to switch to external platforms, creating a seamless and convenient experience. **P2P Chat** facilitates secure and decentralized peer-to-peer communication between users without the need for centralized servers and intermediaries, ensuring privacy and data ownership. Servify uses **Token Gated Chat** restricting access to specific groups of users based on their token ownership. This enables the creation of exclusive communities for high-value users, fostering deeper engagement and loyalty. **Push Notification** enables Servify to send real-time notifications to users' wallets or mobile devices, keeping them informed about important events, updates, and reminders.
 
 
 ### Scroll
