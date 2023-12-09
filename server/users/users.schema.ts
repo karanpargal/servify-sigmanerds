@@ -6,10 +6,6 @@ const userSchema = new mongoose.Schema({
     required: [true, "Please provide a name"],
     unique: true,
   },
-  password: {
-    type: String,
-    required: [true, "Please provide a password"],
-  },
   email: {
     type: String,
     required: [true, "Please provide an email"],
@@ -45,7 +41,6 @@ export const User = mongoose.model("User", userSchema);
 
 export type UserType = {
   name: string;
-  password: string;
   email: string;
   age: number;
   sex: string;
