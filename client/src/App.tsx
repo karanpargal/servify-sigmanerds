@@ -25,7 +25,6 @@ function App() {
           element={isConnected ? <Navigate to="/dashboard" /> : <Home />}
         />
         <Route path="book-service" Component={BookService} />
-
         <Route
           path="/"
           element={

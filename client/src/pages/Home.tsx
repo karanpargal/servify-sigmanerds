@@ -1,6 +1,7 @@
 import services from '@/assets/vectors/services.svg';
 import CustomWalletButton from '@/components/shared/CustomWalletButton';
 import { motion } from 'framer-motion';
+
 export default function Home() {
   return (
     <main className="relative grid min-h-screen place-items-center">
