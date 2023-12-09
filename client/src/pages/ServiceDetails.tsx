@@ -162,7 +162,7 @@ function BookServiceForm({
 
         write({
           args: [response.data._id],
-          value: BigInt(weiValue),
+          value: BigInt(parseInt(weiValue.toFixed(0))),
         });
         toast({ title: 'Booking created!' });
         onSuccess?.();

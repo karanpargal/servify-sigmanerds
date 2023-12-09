@@ -1,4 +1,5 @@
 import axios from 'axios';
+import type { OrderClientType } from '../../../server/orders/orders.schema';
 import type { ServiceClientType } from '../../../server/services/services.schema';
 import type { UserClientType } from '../../../server/users/users.schema';
 
@@ -19,3 +20,13 @@ export const fetchCustomerServiceListing = () =>
 
 export const fetchServiceById = ({ id }: { id: string }) =>
   axiosClient.get<ServiceClientType>(`/services/${id}`).then((res) => res.data);
+
+export const fetchCustomerOrderListing = ({ uid }: { uid: string }) =>
+  axiosClient
+    .get<OrderClientType[]>(`/orders/consumer/${uid}`)
+    .then((res) => res.data);
+
+export const fetchProviderOrderListing = ({ uid }: { uid: string }) =>
+  axiosClient
+    .get<OrderClientType[]>(`/orders/seller/${uid}`)
+    .then((res) => res.data);
