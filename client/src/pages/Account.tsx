@@ -4,13 +4,26 @@ import ManageAccounts from '@/components/Account/ManageAccounts';
 import PastOrdersCard from '@/components/Account/PastOrdersCard';
 import ProfileCard from '@/components/Account/ProfileCard';
 import Settings from '@/components/Account/Settings';
-import useCustomerServiceListings from '@/hooks/useCustomerServiceListings';
-import useWallet from '@/hooks/useWallet';
+import useUserData from '@/hooks/useUserData';
 import axios from 'axios';
+import useWallet from '../hooks/useWallet';
 
 const Accounts = () => {
-  const { address, balance } = useWallet();
-  const { data } = useCustomerServiceListings();
+  const { address } = useWallet();
+  const { data: userData } = useUserData();
+
+  const handleChangePref = async () => {
+    const response = await axios.put(
+      `http://localhost:8080/api/v1/users/${address}`,
+      {
+        preference:
+          userData?.preference === 'provider' ? 'consumer' : 'provider',
+      },
+    );
+    console.log(response.data);
+    window.location.reload();
+  };
+
   const balanceInINR = async () => {
     const tokenInINR = await axios.post(
       'https://api.1inch.dev/price/v1.1/',
@@ -65,8 +78,15 @@ const Accounts = () => {
           </div>
 
           <div className="mr-10 mt-10 flex flex-row justify-center gap-4">
-            <button className="rounded-lg border p-4 px-8 text-2xl">
-              Switch to Provider
+            <button
+              className="rounded-lg border p-4 px-8 text-2xl"
+              onClick={() => {
+                handleChangePref();
+              }}
+            >
+              {userData?.preference === 'provider'
+                ? 'Consumer only dashboard'
+                : 'Become a provider'}
             </button>
           </div>
         </div>
