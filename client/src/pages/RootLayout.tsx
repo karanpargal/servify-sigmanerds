@@ -80,6 +80,7 @@ export default function RootLayout() {
           </NavLink>
         </nav>
       </header>
+
       <Outlet />
     </div>
   );
