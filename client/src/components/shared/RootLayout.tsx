@@ -1,3 +1,4 @@
+import useUserData from '@/hooks/useUserData';
 import { cn } from '@/utils';
 import { motion } from 'framer-motion';
 import { NavLink, Outlet } from 'react-router-dom';
@@ -6,6 +7,8 @@ import Button from '../ui/button';
 import Dialog from '../ui/dialog';
 import HeroIcons from './HeroIcons';
 export default function RootLayout() {
+  const { data: userData } = useUserData();
+
   return (
     <div>
       <header className="relative border-b border-stone-200 bg-background-secondary">
@@ -87,20 +90,22 @@ export default function RootLayout() {
             )}
           </NavLink>
         </nav>
-        <Dialog>
-          <Dialog.Trigger asChild>
-            <Button className="absolute right-6 z-10 max-lg:fixed max-lg:bottom-8 max-lg:right-8 max-lg:h-auto max-lg:rounded-full max-lg:p-4  max-lg:shadow-card lg:top-1/2 lg:-translate-y-1/2">
-              <span className="max-lg:hidden">Create service listing</span>
-              <HeroIcons.PlusIcon className="h-auto w-5 lg:hidden" />
-            </Button>
-          </Dialog.Trigger>
-          <Dialog.Content>
-            <Dialog.Header className="mb-3">
-              <Dialog.Title>Create service listing</Dialog.Title>
-            </Dialog.Header>
-            <CreateServiceListingForm />
-          </Dialog.Content>
-        </Dialog>
+        {userData?.preference === 'provider' && (
+          <Dialog>
+            <Dialog.Trigger asChild>
+              <Button className="absolute right-6 z-10 max-lg:fixed max-lg:bottom-8 max-lg:right-8 max-lg:h-auto max-lg:rounded-full max-lg:p-4  max-lg:shadow-card lg:top-1/2 lg:-translate-y-1/2">
+                <span className="max-lg:hidden">Create service listing</span>
+                <HeroIcons.PlusIcon className="h-auto w-5 lg:hidden" />
+              </Button>
+            </Dialog.Trigger>
+            <Dialog.Content>
+              <Dialog.Header className="mb-3">
+                <Dialog.Title>Create service listing</Dialog.Title>
+              </Dialog.Header>
+              <CreateServiceListingForm />
+            </Dialog.Content>
+          </Dialog>
+        )}
       </header>
 
       <Outlet />

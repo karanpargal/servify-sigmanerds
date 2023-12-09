@@ -1,13 +1,36 @@
 import Button from '@/components/ui/button';
+import useUserData from '@/hooks/useUserData';
 import axios from 'axios';
 import { useState } from 'react';
-import { useNavigate } from 'react-router-dom';
+import { useLocation, useNavigate } from 'react-router-dom';
+
+type Service = {
+  _id: string;
+  title: string;
+  description: string;
+  price: number;
+  category: string;
+  rating: string;
+  reviews: {
+    user: string;
+    rating: number;
+    comment: string;
+  }[];
+  provider: {
+    _id: string;
+    name: string;
+  };
+};
 
 const BookService = () => {
+  const { data: userData } = useUserData();
   const navigate = useNavigate();
+  const location = useLocation();
+  const { service } = location.state as { service: Service };
   const [serviceDate, setServiceDate] = useState('');
   const [address, setAddress] = useState('');
 
+  console.log(service);
   const handleBack = () => {
     navigate('/dashboard');
   };
@@ -16,11 +39,11 @@ const BookService = () => {
     const response = await axios.post(
       `${process.env.REACT_APP_API_URL}/api/v1/orders`,
       {
-        consumer: 'abc',
-        service: 'abc',
-        seller: 'abc',
+        consumer: userData?._id,
+        service: service._id,
+        seller: service.provider._id,
         address: address,
-        amount: 'number',
+        amount: service.price,
         serviceDate: serviceDate,
       },
     );
@@ -34,9 +57,15 @@ const BookService = () => {
       </div>
       <div className="mx-auto w-[50%] rounded-md bg-white p-6 shadow-md">
         <div className="grid grid-cols-1 gap-4">
-          <ServiceDetail label="Service Name" value="ABCD" />
-          <ServiceDetail label="Service Provider" value="Seller Name" />
-          <ServiceDetail label="Service Description" value="Description" />
+          <ServiceDetail label="Service Name" value={service.title} />
+          <ServiceDetail
+            label="Service Provider"
+            value={service.provider.name}
+          />
+          <ServiceDetail
+            label="Service Description"
+            value={service.description}
+          />
           <ServiceInput
             label="Date of Service"
             type="date"
@@ -51,7 +80,7 @@ const BookService = () => {
               setAddress(val);
             }}
           />
-          <ServiceDetail label="Amount" value="$100" />
+          <ServiceDetail label="Amount in Rs." value={service.price} />
         </div>
       </div>
 
@@ -88,7 +117,7 @@ const ServiceInput = ({ label, type, setFunction }: ServiceInputProps) => (
 
 interface ServiceDetailProps {
   label: string;
-  value: string;
+  value: string | number;
 }
 
 interface ServiceInputProps {
