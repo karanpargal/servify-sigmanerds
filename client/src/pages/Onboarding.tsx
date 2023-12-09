@@ -5,6 +5,10 @@
 // sex: string; drop down 🤦🏽‍♂️
 // bio: string; textarea
 // preference: "provider" | "consumer"; radio group
+
+import Button from '@/components/ui/button';
+import useWallet from '@/hooks/useWallet';
+
 // addresses: string[]; accept first address
 import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
@@ -22,6 +26,8 @@ import { Formik } from 'formik';
 import * as Yup from 'yup';
 
 export default function Onboarding() {
+  const { disconnect } = useWallet();
+
   const SignInSchema = Yup.object().shape({
     name: Yup.string()
       .min(2, 'Too Short!')
@@ -161,6 +167,9 @@ export default function Onboarding() {
           </form>
         )}
       </Formik>
+      <footer>
+        <Button onClick={() => disconnect()}>Log out</Button>
+      </footer>
     </main>
   );
 }
