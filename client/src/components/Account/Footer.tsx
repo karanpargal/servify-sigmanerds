@@ -15,25 +15,12 @@ const Footer = () => {
               <h1 className="text-xl">FAQs</h1>
             </div>
           </div>
-<<<<<<< Updated upstream
           <button
             onClick={() => disconnect()}
             className="mr-20 flex flex-col gap-5 "
           >
             <h1 className="text-2xl">Log Out</h1>
           </button>
-=======
-          <div className="mr-20 flex flex-col gap-5 ">
-          <div className="flex flex-row gap-2">
-            <div className="flex  ">
-              <HeroIcons.UserGroupIcon className="h-auto w-8" />
-            </div>
-            <div className="flex">
-              <h1 className="text-xl">About Us</h1>
-            </div>
-          </div>
-          </div>
->>>>>>> Stashed changes
         </div>
       </div>
     </div>

@@ -1,5 +1,4 @@
 import ManageUsername from '@/components/Manage Account/ManageUsername'
-import React from 'react'
 
 const ManageAccount = () => {
   return (
