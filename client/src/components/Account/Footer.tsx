@@ -1,6 +1,8 @@
+import useWallet from '@/hooks/useWallet';
 import HeroIcons from '../shared/HeroIcons';
 
 const Footer = () => {
+  const { disconnect } = useWallet();
   return (
     <div>
       <div className="mt-10 flex justify-center border">
@@ -13,9 +15,12 @@ const Footer = () => {
               <h1 className="text-2xl">FAQs</h1>
             </div>
           </div>
-          <div className="mr-20 flex flex-col gap-5 ">
-            <h1 className="text-2xl">About us</h1>
-          </div>
+          <button
+            onClick={() => disconnect()}
+            className="mr-20 flex flex-col gap-5 "
+          >
+            <h1 className="text-2xl">Log Out</h1>
+          </button>
         </div>
       </div>
     </div>

@@ -1,27 +1,52 @@
+import ProtectedRoute from '@/components/shared/ProtectedRoute';
 import NotFound from '@/pages/404';
+import Accounts from '@/pages/Account';
+import ConsumerDashboard from '@/pages/ConsumerDashboard';
 import Home from '@/pages/Home';
 import Orders from '@/pages/Orders';
 import RootLayout from '@/pages/RootLayout';
-import { Route, Routes } from 'react-router-dom';
-import Accounts from './pages/Account';
-import ConsumerDashboard from './pages/ConsumerDashboard';
+import { Navigate, Route, Routes } from 'react-router-dom';
+import OnboardedRoute from './components/shared/OnboardedRoute';
+import { Toaster } from './components/ui/toaster';
+import useWallet from './hooks/useWallet';
+import Onboarding from './pages/Onboarding';
 
 function App() {
-  const isAuth = false;
+  const { isConnected } = useWallet();
 
   return (
-    <Routes>
-      <Route path="/" Component={RootLayout}>
-        <Route index Component={isAuth ? ConsumerDashboard : Home} />
-        <Route path="orders" Component={Orders} />
-        <Route path="account" Component={Accounts} />
-        <Route path="*" Component={NotFound} />
-        {/* <Route
+    <>
+      <Routes>
+        <Route
+          path="/"
+          element={isConnected ? <Navigate to="/dashboard" /> : <Home />}
+        />
+
+        <Route
+          path="/"
+          element={
+            <ProtectedRoute>
+              <RootLayout />
+            </ProtectedRoute>
+          }
+        >
+          <Route path="onboarding" Component={Onboarding} />
+
+          <Route element={<OnboardedRoute />}>
+            <Route path="dashboard" Component={ConsumerDashboard} />
+            <Route path="orders" Component={Orders} />
+            <Route path="account" Component={Accounts} />
+            {/* <Route
           path="chat"
           Component={Chat({ chatId: '123', signer: signer })}
         /> */}
-      </Route>
-    </Routes>
+          </Route>
+        </Route>
+        {/* Catch all route */}
+        <Route path="*" Component={NotFound} />
+      </Routes>
+      <Toaster />
+    </>
   );
 }
 

@@ -4,11 +4,10 @@ import ManageAccounts from '@/components/Account/ManageAccounts';
 import PastOrdersCard from '@/components/Account/PastOrdersCard';
 import ProfileCard from '@/components/Account/ProfileCard';
 import Settings from '@/components/Account/Settings';
-import { useAccount, useBalance } from 'wagmi';
+import useWallet from '@/hooks/useWallet';
 
 const Accounts = () => {
-  const { address } = useAccount();
-  const { data: balance } = useBalance({ address: address });
+  const { address, balance } = useWallet();
 
   return (
     <div className="container border">

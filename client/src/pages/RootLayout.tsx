@@ -6,7 +6,7 @@ export default function RootLayout() {
     <div>
       <header className="border-b border-neutral-200 bg-background-secondary">
         <nav className="mx-auto flex max-w-7xl items-center justify-center">
-          <NavLink to="/">
+          <NavLink to="/dashboard">
             {({ isActive }) => (
               <motion.div
                 className={cn(
@@ -14,7 +14,7 @@ export default function RootLayout() {
                   isActive && 'text-accent-primary',
                 )}
               >
-                Home
+                Dashboard
                 {isActive && (
                   <motion.span
                     layoutId="rootLayoutNavIndicator"
