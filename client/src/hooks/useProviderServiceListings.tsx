@@ -1,35 +1,18 @@
-import axios from 'axios';
-import { useEffect, useState } from 'react';
+import { fetchProviderServiceListing } from '@/utils/apiClients';
+import { useQuery } from '@tanstack/react-query';
 import useUserData from './useUserData';
 /**
  * @returns an object containing data, loading, and error for the current user
  */
 export default function useProviderServiceListings() {
-  const { data: userData } = useUserData();
-  const [data, setData] = useState(null);
-  const [loading, setLoading] = useState(true);
-  const [error, setError] = useState(null);
+  const user = useUserData();
+  const { data, isLoading, isError } = useQuery({
+    queryKey: ['services', user.data?._id],
 
-  useEffect(() => {
-    const fetchData = async () => {
-      try {
-        setLoading(true);
-        const response = await axios.get(
-          `http://localhost:8080/api/v1/services/seller/${userData?._id}`,
-        );
-        setData(response.data);
-        // eslint-disable-next-line @typescript-eslint/no-explicit-any
-      } catch (error: any) {
-        setError(error);
-      } finally {
-        setLoading(false);
-      }
-    };
+    // eslint-disable-next-line @typescript-eslint/no-non-null-asserted-optional-chain
+    queryFn: () => fetchProviderServiceListing({ uid: user.data?._id! }),
+    enabled: !!user.data?._id,
+  });
 
-    if (userData?._id) {
-      fetchData();
-    }
-  }, [userData?._id]);
-
-  return { data, loading, error };
+  return { data, isLoading, isError };
 }

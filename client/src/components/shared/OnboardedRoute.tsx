@@ -1,10 +1,12 @@
 import useUserData from '@/hooks/useUserData';
 import { Navigate, Outlet } from 'react-router-dom';
+import Loader from './Loader';
 
 export default function OnboardedRoute() {
-  const userData = useUserData();
-  if (userData) {
+  const user = useUserData();
+  if (user.isLoading) return <Loader className="min-h-screen" />;
+  if (user.data) {
     return <Outlet />;
   }
-  return <Navigate to={'/onboarding'} replace />;
+  if (user.isError) return <Navigate to={'/onboarding'} replace />;
 }

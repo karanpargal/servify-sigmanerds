@@ -1,40 +1,27 @@
-import axios from 'axios';
-import { useEffect, useState } from 'react';
+import { fetchCustomerServiceListing } from '@/utils/apiClients';
+import { useQuery } from '@tanstack/react-query';
 import useUserData from './useUserData';
 /**
  * @returns an object containing data, loading, and error for the current user
  */
 export default function useCustomerServiceListings() {
-  const { data: userData } = useUserData();
-  const [data, setData] = useState(null);
-  const [loading, setLoading] = useState(true);
-  const [error, setError] = useState(null);
+  const user = useUserData();
 
-  useEffect(() => {
-    const fetchData = async () => {
-      try {
-        setLoading(true);
-        const response = await axios.get(
-          `http://localhost:8080/api/v1/services/`,
-        );
-        console.log('data', response.data);
-        const d = response.data.filter((item: any) => {
-          return item.seller._id !== userData?._id;
-        });
-        setData(d);
-        console.log('data d', d);
-        // eslint-disable-next-line @typescript-eslint/no-explicit-any
-      } catch (error: any) {
-        setError(error);
-      } finally {
-        setLoading(false);
-      }
-    };
+  const {
+    data = [],
+    isLoading,
+    isError,
+  } = useQuery({
+    queryKey: ['services'],
+    // eslint-disable-next-line @typescript-eslint/no-non-null-asserted-optional-chain
+    queryFn: () => fetchCustomerServiceListing(),
+    enabled: !!user.data?._id,
+  });
 
-    if (userData?._id) {
-      fetchData();
-    }
-  }, [userData?._id]);
+  const _data = data.filter((service) => {
+    // @ts-expect-error _id is not defined on type
+    return service.seller._id !== user.data?._id;
+  });
 
-  return { data, loading, error };
+  return { data: _data, isLoading, isError };
 }

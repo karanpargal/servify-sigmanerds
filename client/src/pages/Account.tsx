@@ -39,14 +39,7 @@ const Accounts = () => {
       <div className="flex justify-center ">
         <div className="flex-row">
           <div>
-            <ProfileCard
-              address={address?.toString() || ''}
-              balance={
-                balance === undefined
-                  ? ''
-                  : balance.formatted.slice(0, 5) + ' ' + balance.symbol
-              }
-            />
+            <ProfileCard />
           </div>
 
           <div className="m-4 mt-10 flex justify-between ">

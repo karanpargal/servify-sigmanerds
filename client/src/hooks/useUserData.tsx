@@ -1,5 +1,5 @@
-import axios from 'axios';
-import { useEffect, useState } from 'react';
+import { fetchUserData } from '@/utils/apiClients';
+import { useQuery } from '@tanstack/react-query';
 import useWallet from './useWallet';
 
 /**
@@ -7,30 +7,11 @@ import useWallet from './useWallet';
  */
 export default function useUserData() {
   const { address } = useWallet();
-  const [data, setData] = useState(null);
-  const [loading, setLoading] = useState(true);
-  const [error, setError] = useState(null);
+  const { data, isLoading, isError } = useQuery({
+    queryKey: ['user', address],
+    queryFn: () => fetchUserData({ address: address! }),
+    enabled: !!address,
+  });
 
-  useEffect(() => {
-    const fetchData = async () => {
-      try {
-        setLoading(true);
-        const response = await axios.get(
-          `http://localhost:8080/api/v1/users/${address}`,
-        );
-        setData(response.data);
-        // eslint-disable-next-line @typescript-eslint/no-explicit-any
-      } catch (error: any) {
-        setError(error);
-      } finally {
-        setLoading(false);
-      }
-    };
-
-    if (address) {
-      fetchData();
-    }
-  }, [address]);
-
-  return { data, loading, error };
+  return { data, isLoading, isError };
 }

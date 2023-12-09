@@ -9,9 +9,9 @@ import UserDetailsForm from '@/components/Forms/UserDetailsForm';
 export default function Onboarding() {
   const { disconnect } = useWallet();
 
-  const userData = useUserData();
+  const user = useUserData();
 
-  if (userData) return <Navigate to="/dashboard" />;
+  if (user.data) return <Navigate to="/dashboard" />;
 
   return (
     <main className="mx-auto max-w-2xl">

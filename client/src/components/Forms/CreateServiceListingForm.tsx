@@ -37,7 +37,7 @@ const CreateServiceListingSchema = Yup.object().shape({
 
 export default function CreateServiceListingForm() {
   const { toast } = useToast();
-  const { data: userData } = useUserData();
+  const user = useUserData();
 
   const formik = useFormik({
     initialValues: {
@@ -56,7 +56,7 @@ export default function CreateServiceListingForm() {
           price: values.pricing,
           description: values.description,
           category: values.category,
-          seller: userData?._id,
+          seller: user.data?._id,
         })
         // eslint-disable-next-line @typescript-eslint/no-unused-vars, @typescript-eslint/no-explicit-any
         .then((data: any) => {

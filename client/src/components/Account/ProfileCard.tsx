@@ -1,9 +1,9 @@
 import useUserData from '@/hooks/useUserData';
+import useWallet from '@/hooks/useWallet';
 
-const ProfileCard = ({ address, balance }: ProfileCardProps) => {
-  const { data: userData } = useUserData();
-
-  console.log(userData);
+const ProfileCard = () => {
+  const { address, balance } = useWallet();
+  const user = useUserData();
 
   return (
     <div>
@@ -11,10 +11,10 @@ const ProfileCard = ({ address, balance }: ProfileCardProps) => {
         <div className="flex w-[600px] flex-row justify-between gap-x-10 p-10 ">
           <div className="flex flex-col   ">img</div>
           <div className="mr-20 flex w-1/2 flex-col gap-5">
-            <h1 className="text-4xl">{userData?.name}</h1>
-            <p className="... truncate text-xl">{address}</p>
-            <p>{balance}</p>
-            <p>{userData?.email}</p>
+            <h1 className="text-4xl">{user.data?.name}</h1>
+            <p className="truncate text-xl">{address}</p>
+            <p>{balance?.formatted}</p>
+            <p>{user.data?.email}</p>
           </div>
         </div>
       </div>
@@ -23,8 +23,3 @@ const ProfileCard = ({ address, balance }: ProfileCardProps) => {
 };
 
 export default ProfileCard;
-
-interface ProfileCardProps {
-  address: string;
-  balance: string;
-}

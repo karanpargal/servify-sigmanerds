@@ -12,15 +12,18 @@ import Onboarding from '@/pages/Onboarding';
 import Orders from '@/pages/Orders';
 import BookService from './pages/BookService';
 
+import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
 import { Navigate, Route, Routes } from 'react-router-dom';
 import ChatLayout from './components/shared/ChatsLayout';
 import ChatView from './pages/Chat';
+
+const queryClient = new QueryClient();
 
 function App() {
   const { isConnected } = useWallet();
 
   return (
-    <>
+    <QueryClientProvider client={queryClient}>
       <Routes>
         <Route
           path="/"
@@ -51,7 +54,7 @@ function App() {
         <Route path="*" Component={NotFound} />
       </Routes>
       <Toaster />
-    </>
+    </QueryClientProvider>
   );
 }
 
