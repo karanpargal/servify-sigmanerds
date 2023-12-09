@@ -8,3 +8,19 @@
     @apply bg-background-primary font-sans text-text-primary;
   }
 }
+
+@layer utilities {
+  .anon-aadhaar-button-wrapper button {
+    all: unset;
+    @apply flex w-full justify-center;
+  }
+
+  .anon-aadhaar-button-wrapper button::after {
+    margin-left: 0.5ch;
+    content: 'with Anon Aadhaar';
+  }
+
+  .anon-aadhaar-button-wrapper button img {
+    @apply mr-3 h-auto w-5;
+  }
+}

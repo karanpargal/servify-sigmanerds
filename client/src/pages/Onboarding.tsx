@@ -12,22 +12,26 @@ import useWallet from '@/hooks/useWallet';
 import { Navigate } from 'react-router-dom';
 
 // addresses: string[]; accept first address
-import { useState } from 'react';
+import UserDetailsForm from '@/components/Forms/UserDetailsForm';
 
 export default function Onboarding() {
-  const [step, setstep] = useState<0 | 1>(0);
   const { disconnect } = useWallet();
 
   const userData = useUserData();
 
   if (userData) return <Navigate to="/dashboard" />;
   return (
-    <main>
-      {/* <UserDetailsForm /> */}
-
-      <footer>
-        <Button onClick={() => disconnect()}>Log out</Button>
-      </footer>
+    <main className="mx-auto max-w-2xl">
+      <section className="m-6 my-12 rounded-xl border-2 border-stone-200 bg-background-secondary p-6 py-10">
+        <UserDetailsForm />
+        <Button
+          className="mt-4 block w-full flex-1"
+          onClick={() => disconnect()}
+          variant="outline"
+        >
+          Log out
+        </Button>
+      </section>
     </main>
   );
 }

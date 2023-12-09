@@ -4,7 +4,7 @@ import { NavLink, Outlet } from 'react-router-dom';
 export default function RootLayout() {
   return (
     <div>
-      <header className="border-b border-neutral-200 bg-background-secondary">
+      <header className="border-b border-stone-200 bg-background-secondary">
         <nav className="mx-auto flex max-w-7xl items-center justify-center">
           <NavLink to="/dashboard">
             {({ isActive }) => (
