@@ -6,11 +6,12 @@ import ProfileCard from '@/components/Account/ProfileCard';
 import Settings from '@/components/Account/Settings';
 import useWallet from '@/hooks/useWallet';
 
+
 const Accounts = () => {
   const { address, balance } = useWallet();
 
   return (
-    <div className="container border">
+    <div className="container ">
       <div className="flex justify-center ">
         <div className="flex-row">
           <div>
@@ -44,6 +45,22 @@ const Accounts = () => {
 
           <div>
             <Footer />
+          </div>
+
+          <div className='flex flex-row justify-center mt-10 gap-4 mr-10' >
+            <div>
+              <button className='text-2xl border rounded-lg p-4 px-8'>
+              Switch to Provider
+
+              
+            </button>
+
+            </div>
+            <button className='text-2xl border rounded-lg p-4 px-8'>
+
+            Log Out
+            </button>
+            
           </div>
         </div>
       </div>
