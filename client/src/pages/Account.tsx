@@ -4,11 +4,35 @@ import ManageAccounts from '@/components/Account/ManageAccounts';
 import PastOrdersCard from '@/components/Account/PastOrdersCard';
 import ProfileCard from '@/components/Account/ProfileCard';
 import Settings from '@/components/Account/Settings';
+import axios from 'axios';
 import { useAccount, useBalance } from 'wagmi';
 
 const Accounts = () => {
   const { address } = useAccount();
   const { data: balance } = useBalance({ address: address });
+
+  const balanceInINR = async () => {
+    const tokenInINR = await axios.post(
+      'https://api.1inch.dev/price/v1.1/',
+      {
+        tokens: ['0x7ceb23fd6bc0add59e62ac25578270cff1b9f619'],
+        currency: 'USD',
+      },
+      {
+        headers: {
+          Authorization: `Bearer ${process.env.REACT_APP_1INCH_API_KEY}}`,
+          'Access-Control-Allow-Origin': '*',
+          'Access-Control-Allow-Headers': 'Content-Type, Authorization',
+          'Access-Control-Allow-Methods':
+            'GET, POST, OPTIONS, PUT, PATCH, DELETE',
+          Accept: 'application/json',
+        },
+      },
+    );
+    console.log(tokenInINR);
+  };
+
+  balanceInINR();
 
   return (
     <div className="container border">
