@@ -22,10 +22,10 @@ import { useState } from 'react';
 
 export default function Onboarding() {
   const [step, setstep] = useState<0 | 1>(0);
-  const { disconnect } = useWallet();
+  const { disconnect, address: walletAddress } = useWallet();
 
   const userData = useUserData();
-  const SignInSchema = Yup.object().shape({
+  const ListingSchema = Yup.object().shape({
     title: Yup.string()
       .min(5, 'Too Short!')
       .max(50, 'Too Long!')
@@ -46,6 +46,7 @@ export default function Onboarding() {
 
 
   if (userData) return <Navigate to="/dashboard" />;
+  
   return (
     <main>
       <Formik
@@ -57,7 +58,7 @@ export default function Onboarding() {
         pricing: '',
         
       }}
-      validationSchema={SignInSchema}
+      validationSchema={ListingSchema}
       onSubmit={(values, { setSubmitting }) => {
         setTimeout(() => {
           alert(JSON.stringify(values, null, 2));
@@ -148,6 +149,7 @@ export default function Onboarding() {
 
 
 
+              
       <footer>
         <Button onClick={() => disconnect()}>Log out</Button>
       </footer>
