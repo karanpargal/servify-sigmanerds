@@ -53,9 +53,12 @@ const Settings = () => {
 
   return (
     <div>
-      <div className="mr-[105px] flex flex-row gap-2" onClick={openModal}>
+      <div
+        className="mr-[105px] flex flex-row items-center gap-2"
+        onClick={openModal}
+      >
         <div className="flex">
-          <HeroIcons.Cog8ToothIcon className="h-auto w-8" />
+          <HeroIcons.Cog8ToothIcon className="h-8 w-8" />
         </div>
         <div className="flex">
           <h1 className="text-2xl hover:cursor-pointer">Settings</h1>

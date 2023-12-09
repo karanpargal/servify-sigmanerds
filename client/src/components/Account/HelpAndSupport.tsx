@@ -3,9 +3,9 @@ import HeroIcons from '../shared/HeroIcons';
 const HelpAndSupport = () => {
   return (
     <div>
-      <div className="flex flex-row gap-2">
+      <div className="flex flex-row items-start gap-2">
         <div className="flex  ">
-          <HeroIcons.ChatBubbleLeftRightIcon className="h-auto w-8" />
+          <HeroIcons.ChatBubbleLeftRightIcon className="h-8 w-8" />
         </div>
         <div className="flex">
           <h1 className="text-2xl">Help And Support</h1>

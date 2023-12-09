@@ -8,11 +8,9 @@ export default function FeaturedServices() {
       <h1 className="mb-3 text-2xl font-bold">Recommended Services</h1>
       <div className="overflow-y-scroll py-3">
         <div className="flex gap-4">
-          {[...services, ...services, ...services, ...services].map(
-            (service) => (
-              <FeaturedServiceCard service={service} />
-            ),
-          )}
+          {services.map((service) => (
+            <FeaturedServiceCard service={service} />
+          ))}
         </div>
       </div>
     </section>

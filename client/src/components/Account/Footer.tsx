@@ -1,11 +1,12 @@
 import useWallet from '@/hooks/useWallet';
 import HeroIcons from '../shared/HeroIcons';
+import Button from '../ui/button';
 
 const Footer = () => {
   const { disconnect } = useWallet();
   return (
     <div>
-      <div className="mt-10 flex justify-center border">
+      <div className="mt-10 flex justify-center ">
         <div className="flex w-[600px] flex-row justify-between gap-x-10 p-10 ">
           <div className="flex flex-row gap-2">
             <div className="flex  ">
@@ -15,12 +16,14 @@ const Footer = () => {
               <h1 className="text-xl">FAQs</h1>
             </div>
           </div>
-          <button
-            onClick={() => disconnect()}
-            className="mr-20 flex flex-col gap-5 "
+
+          <Button
+            onClick={() => {
+              disconnect();
+            }}
           >
-            <h1 className="text-2xl">Log Out</h1>
-          </button>
+            <span>Log Out</span>
+          </Button>
         </div>
       </div>
     </div>
