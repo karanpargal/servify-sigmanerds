@@ -13,6 +13,7 @@ import Orders from '@/pages/Orders';
 import BookService from './pages/BookService';
 
 import { Navigate, Route, Routes } from 'react-router-dom';
+import CreateServiceListingForm from './components/Forms/CreateServiceListingForm';
 
 function App() {
   const { isConnected } = useWallet();
@@ -25,6 +26,7 @@ function App() {
           element={isConnected ? <Navigate to="/dashboard" /> : <Home />}
         />
         <Route path="book-service" Component={BookService} />
+        <Route path="create-listing" Component={CreateServiceListingForm} />
         <Route
           path="/"
           element={

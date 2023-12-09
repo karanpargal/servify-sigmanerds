@@ -1,3 +1,5 @@
+import useUserData from '@/hooks/useUserData';
+import axios from 'axios';
 import { useFormik } from 'formik';
 import * as Yup from 'yup';
 import Button from '../ui/button';
@@ -12,6 +14,7 @@ import {
   SelectValue,
 } from '../ui/select';
 import { Textarea } from '../ui/textarea';
+import { useToast } from '../ui/use-toast';
 
 const categoryies = [
   'Software Development',
@@ -23,7 +26,7 @@ const categoryies = [
 
 const CreateServiceListingSchema = Yup.object().shape({
   title: Yup.string().required('Title is required'),
-  imageUrl: Yup.string().required('Service image is Required'),
+  // imageUrl: Yup.string().required('Service image is Required'),
   description: Yup.string()
     .required('Description is required')
     .min(50, 'Description must be atleast 50 characters long'),
@@ -33,10 +36,13 @@ const CreateServiceListingSchema = Yup.object().shape({
 });
 
 export default function CreateServiceListingForm() {
+  const { toast } = useToast();
+  const { data: userData } = useUserData();
+
   const formik = useFormik({
     initialValues: {
       title: '',
-      imageUrl: '',
+      // imageUrl: '',
       description: '',
       duration: '',
       pricing: '',
@@ -44,7 +50,32 @@ export default function CreateServiceListingForm() {
     },
     validationSchema: CreateServiceListingSchema,
     onSubmit: (values) => {
-      console.log(values);
+      axios
+        .post(`http://localhost:8080/api/v1/services/`, {
+          name: values.title,
+          price: values.pricing,
+          description: values.description,
+          category: values.category,
+          seller: userData?._id,
+        })
+        // eslint-disable-next-line @typescript-eslint/no-unused-vars, @typescript-eslint/no-explicit-any
+        .then((data: any) => {
+          console.log('Done');
+        })
+        // eslint-disable-next-line @typescript-eslint/no-unused-vars, @typescript-eslint/no-explicit-any
+        .catch((error: any) => {
+          toast({
+            title: 'Error while submitting',
+            description: 'Please resubmit the form',
+            variant: 'destructive',
+          });
+        })
+        .finally(() => {
+          toast({
+            title: 'Service listed successfully',
+            description: 'Your service is listed successfully',
+          });
+        });
     },
   });
 
@@ -82,7 +113,7 @@ export default function CreateServiceListingForm() {
       </div>
 
       <div className="space-y-1">
-        <Label htmlFor="duration">Duration</Label>
+        <Label htmlFor="duration">Duration in hours</Label>
         <Input
           type="number"
           name="duration"
@@ -96,7 +127,7 @@ export default function CreateServiceListingForm() {
         )}
       </div>
       <div className="space-y-1">
-        <Label htmlFor="pricing">Pricing</Label>
+        <Label htmlFor="pricing">Pricing in ₹</Label>
         <Input
           type="number"
           name="pricing"
