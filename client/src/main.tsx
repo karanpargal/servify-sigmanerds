@@ -1,5 +1,6 @@
 import { RainbowKitProvider, getDefaultWallets } from '@rainbow-me/rainbowkit';
 import '@rainbow-me/rainbowkit/styles.css';
+import { AnonAadhaarProvider } from 'anon-aadhaar-react';
 import React from 'react';
 import ReactDOM from 'react-dom/client';
 import { BrowserRouter } from 'react-router-dom';
@@ -7,6 +8,7 @@ import { WagmiConfig, configureChains, createConfig } from 'wagmi';
 import { scrollSepolia } from 'wagmi/chains';
 import { publicProvider } from 'wagmi/providers/public';
 import App from './App.tsx';
+import PROJECT_CONFIG from './config.ts';
 import './index.css';
 
 const { chains, publicClient } = configureChains(
@@ -15,8 +17,8 @@ const { chains, publicClient } = configureChains(
 );
 
 const { connectors } = getDefaultWallets({
-  appName: 'My RainbowKit App',
-  projectId: '7438ad45e57979f3ff414f2b2a05a2fa',
+  appName: PROJECT_CONFIG.appName,
+  projectId: PROJECT_CONFIG.projectId,
   chains,
 });
 
@@ -52,9 +54,11 @@ ReactDOM.createRoot(document.getElementById('root')!).render(
   <React.StrictMode>
     <WagmiConfig config={wagmiConfig}>
       <RainbowKitProvider chains={chains}>
-        <BrowserRouter>
-          <App />
-        </BrowserRouter>
+        <AnonAadhaarProvider _appId={PROJECT_CONFIG.projectId}>
+          <BrowserRouter>
+            <App />
+          </BrowserRouter>
+        </AnonAadhaarProvider>
       </RainbowKitProvider>
     </WagmiConfig>
   </React.StrictMode>,

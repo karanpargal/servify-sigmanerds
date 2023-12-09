@@ -6,7 +6,6 @@ import ProfileCard from '@/components/Account/ProfileCard';
 import Settings from '@/components/Account/Settings';
 import useWallet from '@/hooks/useWallet';
 
-
 const Accounts = () => {
   const { address, balance } = useWallet();
 
@@ -47,20 +46,15 @@ const Accounts = () => {
             <Footer />
           </div>
 
-          <div className='flex flex-row justify-center mt-10 gap-4 mr-10' >
+          <div className="mr-10 mt-10 flex flex-row justify-center gap-4">
             <div>
-              <button className='text-2xl border rounded-lg p-4 px-8'>
-              Switch to Provider
-
-              
-            </button>
-
+              <button className="rounded-lg border p-4 px-8 text-2xl">
+                Switch to Provider
+              </button>
             </div>
-            <button className='text-2xl border rounded-lg p-4 px-8'>
-
-            Log Out
+            <button className="rounded-lg border p-4 px-8 text-2xl">
+              Log Out
             </button>
-            
           </div>
         </div>
       </div>
