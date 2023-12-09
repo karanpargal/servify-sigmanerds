@@ -7,7 +7,9 @@ import { Textarea } from '@/components/ui/textarea';
 import { useToast } from '@/components/ui/use-toast';
 import useGetService from '@/hooks/useGetService';
 import useUserData from '@/hooks/useUserData';
+import useWallet from '@/hooks/useWallet';
 import { axiosClient } from '@/utils/apiClients';
+import { CONSTANTS, PushAPI } from '@pushprotocol/restapi';
 import { Label } from '@radix-ui/react-label';
 import dayjs from 'dayjs';
 import { useFormik } from 'formik';
@@ -104,6 +106,9 @@ function BookServiceForm({
 
   const { toast } = useToast();
   const tomorrow = dayjs().add(1, 'day').startOf('day').toDate();
+  const { walletClient: signer } = useWallet();
+
+  const pushUser = PushAPI.initialize(signer, { env: CONSTANTS.ENV.STAGING });
 
   const { write } = useContractWrite({
     address: '0xC434c7be548A31fb8dA76f0CC3Cf25e51166B039',
@@ -139,6 +144,16 @@ function BookServiceForm({
           amount: service.price,
           serviceDate: values.date,
         });
+
+        const userChatBegin = (await pushUser).chat.send(
+          service.seller.walletAddress,
+          {
+            type: 'Text',
+            content: 'Hey, I have booked your service.',
+          },
+        );
+
+        console.log(userChatBegin);
 
         const weiValue = 0.0000051 * service.price * 1000000000000000000;
 
