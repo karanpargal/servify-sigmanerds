@@ -1,7 +1,6 @@
 import { RainbowKitProvider, getDefaultWallets } from '@rainbow-me/rainbowkit';
 import '@rainbow-me/rainbowkit/styles.css';
 import { AnonAadhaarProvider } from 'anon-aadhaar-react';
-import React from 'react';
 import ReactDOM from 'react-dom/client';
 import { WagmiConfig, configureChains, createConfig } from 'wagmi';
 import { scrollSepolia } from 'wagmi/chains';
@@ -50,13 +49,11 @@ const wagmiConfig = createConfig({
 });
 
 ReactDOM.createRoot(document.getElementById('root')!).render(
-  <React.StrictMode>
-    <WagmiConfig config={wagmiConfig}>
-      <RainbowKitProvider chains={chains}>
-        <AnonAadhaarProvider _appId={ANON_AADHAAR_APP_ID}>
-          <App />
-        </AnonAadhaarProvider>
-      </RainbowKitProvider>
-    </WagmiConfig>
-  </React.StrictMode>,
+  <WagmiConfig config={wagmiConfig}>
+    <RainbowKitProvider chains={chains}>
+      <AnonAadhaarProvider _appId={ANON_AADHAAR_APP_ID}>
+        <App />
+      </AnonAadhaarProvider>
+    </RainbowKitProvider>
+  </WagmiConfig>,
 );

@@ -1,10 +1,12 @@
-import HeroIcons from '@/components/shared/HeroIcons';
+import HeroIcons, { HeroSolidIcons } from '@/components/shared/HeroIcons';
+import useCustomerOrderListing from '@/hooks/useCustomerOrderListing';
 import { cn } from '@/utils';
 import dayjs from 'dayjs';
 import advancedFormat from 'dayjs/plugin/advancedFormat';
+import type { OrderClientType } from '../../../server/orders/orders.schema';
 dayjs.extend(advancedFormat);
 
-type OrderStatusEnum = 'UPCOMING' | 'IN_PROGRESS' | 'COMPLETED' | 'CANCELLED';
+type OrderStatusEnum = OrderClientType['status'];
 
 type Order = {
   title: string;
@@ -13,40 +15,24 @@ type Order = {
   scheduleDate?: Date;
   completionDate?: Date;
   status: OrderStatusEnum;
-  provider: {
-    imageUrl: string;
-    name: string;
-  };
+  providerName: string;
 };
 type Props = {
   order: Order;
 };
 
 function OrderCard({ order }: Props) {
-  const getStatusText = () => {
-    switch (order.status) {
-      case 'UPCOMING':
-        return 'Upcoming';
-      case 'IN_PROGRESS':
-        return 'In Progress';
-      case 'COMPLETED':
-        return 'Completed';
-      case 'CANCELLED':
-        return 'Cancelled';
-    }
-  };
-
   const getStatusIcon = () => {
     switch (order.status) {
-      case 'UPCOMING':
+      case 'Upcoming':
         return <HeroIcons.CalendarIcon className="h-auto w-4" />;
-      case 'IN_PROGRESS':
+      case 'In Progress':
         return (
           <HeroIcons.ArrowPathIcon className="h-auto w-4 animate-spin [animation-duration:_2.5s]" />
         );
-      case 'COMPLETED':
+      case 'Completed':
         return <HeroIcons.CheckCircleIcon className="h-auto w-4" />;
-      case 'CANCELLED':
+      case 'Cancelled':
         return <HeroIcons.XCircleIcon className="h-auto w-4" />;
     }
   };
@@ -58,30 +44,30 @@ function OrderCard({ order }: Props) {
           'flex items-center justify-between px-4 py-2 text-xs font-medium',
           {
             'bg-status-upcoming/10 text-status-upcoming':
-              order.status === 'UPCOMING',
+              order.status === 'Upcoming',
             ' bg-status-inprogress/10 text-status-inprogress':
-              order.status === 'IN_PROGRESS',
+              order.status === 'In Progress',
             'bg-status-completed/10 text-status-completed':
-              order.status === 'COMPLETED',
+              order.status === 'Completed',
             'bg-status-cancelled/10 text-status-cancelled':
-              order.status === 'CANCELLED',
+              order.status === 'Cancelled',
           },
         )}
       >
         <span className="flex items-center gap-x-2">
           {getStatusIcon()}
-          {getStatusText()}
+          {order.status}
         </span>
-        {['UPCOMING', 'COMPLETED'].includes(order.status) && (
+        {['Upcoming', 'Completed'].includes(order.status) && (
           <>
             {order.scheduleDate && (
               <span className="text-text-primary">
-                On {dayjs(order.scheduleDate).format('Do MMM, YY')}
+                On {dayjs(order.scheduleDate).format('MMM Do, YY')}
               </span>
             )}
             {order.completionDate && (
               <span className="text-text-primary">
-                On {dayjs(order.scheduleDate).format('h:mm a, Do MMM, YY')}
+                On {dayjs(order.scheduleDate).format('h:mm a, MMM Do, YY')}
               </span>
             )}
           </>
@@ -93,22 +79,17 @@ function OrderCard({ order }: Props) {
             {order.title}
           </h2>
           <div className="mt-2 flex items-center gap-x-2 text-sm text-text-secondary">
-            <button>
-              <img
-                src={order.provider.imageUrl}
-                className="aspect-square w-8 rounded-full object-cover"
-              />
-            </button>
-            <span>{order.provider.name}</span>
+            <HeroSolidIcons.UserCircleIcon className="h-auto w-6" />
+            <span>{order.providerName}</span>
           </div>
         </div>
-        {['IN_PROGRESS', 'UPCOMING'].includes(order.status) && (
+        {['In Progress', 'Upcoming'].includes(order.status) && (
           <button className="self-center rounded-lg bg-background-secondary p-2 transition-all hover:brightness-95 active:scale-90">
             <HeroIcons.ChatBubbleLeftIcon className="h-auto w-5" />
           </button>
         )}
       </div>
-      {order.status === 'UPCOMING' && (
+      {order.status === 'Upcoming' && (
         <footer className="text-sm text-background-secondary">
           <button className="flex w-full items-center justify-center gap-x-2 bg-accent-secondary py-3 transition-all hover:brightness-110 active:brightness-95">
             <HeroIcons.QrCodeIcon className="h-auto w-4" />
@@ -121,28 +102,46 @@ function OrderCard({ order }: Props) {
 }
 
 export default function Orders() {
+  const { data = [] } = useCustomerOrderListing();
   return (
-    <main className="mx-auto mb-12 mt-32 max-w-3xl rounded-xl bg-background-secondary p-6 pt-14">
-      <h1 className="mb-14 text-4xl font-bold">Your Orders</h1>
-      <section className="space-y-6">
-        <OrderCard
+    <main className="space-y-8 px-4 pb-12 pt-32">
+      <section className="mx-auto max-w-3xl rounded-xl bg-background-secondary p-6 pt-0">
+        <h1 className="py-14 text-4xl font-bold">Service requests</h1>
+        <div className="space-y-6">
+          {data.map((order) => (
+            <OrderCard
+              order={{
+                title: order.service.name,
+                description: order.service.description,
+                scheduleDate: order.serviceDate,
+                status: order.status,
+                price: order.service.price,
+                providerName: order.seller.name,
+              }}
+            />
+          ))}
+        </div>
+      </section>
+      <section className="mx-auto max-w-3xl rounded-xl bg-background-secondary p-6 pt-0">
+        <h1 className="py-14 text-4xl font-bold">Your Orders</h1>
+        <div className="space-y-6">
+          {data.map((order) => (
+            <OrderCard
+              order={{
+                title: order.service.name,
+                description: order.service.description,
+                scheduleDate: order.serviceDate,
+                status: order.status,
+                price: order.service.price,
+                providerName: order.seller.name,
+              }}
+            />
+          ))}
+
+          {/* <OrderCard
           order={{
             title:
-              'Kitchen and Bathroom Pest Control Kitchen and Bathroom Pest Control Kitchen and Bathroom Pest Control',
-            description: 'Lorem ipsum',
-            scheduleDate: new Date(),
-            status: 'UPCOMING',
-            price: 100,
-            provider: {
-              name: 'Yashvardhan Jagnani',
-              imageUrl: 'https://avatars.githubusercontent.com/u/60016972?v=4',
-            },
-          }}
-        />
-        <OrderCard
-          order={{
-            title:
-              'Kitchen and Bathroom Pest Control Kitchen and Bathroom Pest Control Kitchen and Bathroom Pest Control',
+            'Kitchen and Bathroom Pest Control Kitchen and Bathroom Pest Control Kitchen and Bathroom Pest Control',
             description: 'Lorem ipsum',
             scheduleDate: new Date(),
             status: 'IN_PROGRESS',
@@ -152,11 +151,11 @@ export default function Orders() {
               imageUrl: 'https://avatars.githubusercontent.com/u/60016972?v=4',
             },
           }}
-        />
-        <OrderCard
+          />
+          <OrderCard
           order={{
             title:
-              'Kitchen and Bathroom Pest Control Kitchen and Bathroom Pest Control Kitchen and Bathroom Pest Control',
+            'Kitchen and Bathroom Pest Control Kitchen and Bathroom Pest Control Kitchen and Bathroom Pest Control',
             description: 'Lorem ipsum',
             completionDate: new Date(),
             status: 'COMPLETED',
@@ -166,11 +165,11 @@ export default function Orders() {
               imageUrl: 'https://avatars.githubusercontent.com/u/60016972?v=4',
             },
           }}
-        />
-        <OrderCard
+          />
+          <OrderCard
           order={{
             title:
-              'Kitchen and Bathroom Pest Control Kitchen and Bathroom Pest Control Kitchen and Bathroom Pest Control',
+            'Kitchen and Bathroom Pest Control Kitchen and Bathroom Pest Control Kitchen and Bathroom Pest Control',
             description: 'Lorem ipsum',
             scheduleDate: new Date(),
             status: 'CANCELLED',
@@ -180,7 +179,8 @@ export default function Orders() {
               imageUrl: 'https://avatars.githubusercontent.com/u/60016972?v=4',
             },
           }}
-        />
+        /> */}
+        </div>
       </section>
     </main>
   );
