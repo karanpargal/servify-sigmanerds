@@ -49,13 +49,13 @@ const Accounts = () => {
 
   return (
     <div className="container ">
-      <div className="flex justify-center ">
-        <div className="flex-row">
+      <div className="mt-8 flex justify-center">
+        <div className=" flex-row rounded-xl border  bg-background-secondary p-4 pb-8">
           <div>
             <ProfileCard />
           </div>
 
-          <div className="m-4 mt-10 flex justify-between ">
+          <div className="item-start m-4 flex justify-between ">
             <div>
               <PastOrdersCard />
             </div>
