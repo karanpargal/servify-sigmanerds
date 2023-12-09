@@ -1,11 +1,12 @@
 import { ethers } from "ethers";
 import { escrowContractABI, escrowContractAddress } from "../consts/escrow";
+import { User } from "../users/users.schema";
 import orderSchema, { OrderType } from "./orders.schema";
 
 const createOrder = async (order: OrderType) => {
   try {
     const newOrder = await orderSchema.create(order);
-    const seller = await newOrder.populate("seller").execPopulate();
+    const seller = await User.findById(newOrder.seller);
 
     const provider = new ethers.providers.JsonRpcProvider(process.env.RPC_URL!);
     const signer = new ethers.Wallet(process.env.PRIVATE_KEY!, provider);
@@ -14,7 +15,7 @@ const createOrder = async (order: OrderType) => {
       escrowContractABI,
       signer
     );
-    const tx = await contract.createOrder(newOrder._id, seller.walletAddress);
+    const tx = await contract.createOrder(newOrder._id, seller?.walletAddress);
     await tx.wait();
     return newOrder;
   } catch (error) {
@@ -101,12 +102,54 @@ const deleteOrder = async (id: string) => {
   }
 };
 
+const completeOrder = async (id: string) => {
+  try {
+    const order = await getOrder(id);
+    const provider = new ethers.providers.JsonRpcProvider(process.env.RPC_URL!);
+    const signer = new ethers.Wallet(process.env.PRIVATE_KEY!, provider);
+    const contract = new ethers.Contract(
+      escrowContractAddress,
+      escrowContractABI,
+      signer
+    );
+    const tx = await contract.completeTransaction(id);
+    await tx.wait();
+    order.completedAt = new Date();
+    await order.save();
+    return order;
+  } catch (error) {
+    throw error;
+  }
+};
+
+const refundOrder = async (id: string) => {
+  try {
+    const order = await getOrder(id);
+    const provider = new ethers.providers.JsonRpcProvider(process.env.RPC_URL!);
+    const signer = new ethers.Wallet(process.env.PRIVATE_KEY!, provider);
+    const contract = new ethers.Contract(
+      escrowContractAddress,
+      escrowContractABI,
+      signer
+    );
+    const tx = await contract.refundTransaction(id);
+    await tx.wait();
+    order.completedAt = new Date();
+    await order.save();
+    return order;
+  } catch (error) {
+    throw error;
+  }
+};
+
 export {
+  completeOrder,
   createOrder,
   deleteOrder,
   getOrder,
   getOrders,
   getOrdersByConsumer,
   getOrdersBySeller,
+  refundOrder,
   updateOrder,
 };

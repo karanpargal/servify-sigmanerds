@@ -1,13 +1,15 @@
-import { Router } from "express";
 import type { Request, Response } from "express";
+import { Router } from "express";
 import {
+  completeOrder,
   createOrder,
+  deleteOrder,
   getOrder,
   getOrders,
-  updateOrder,
-  deleteOrder,
   getOrdersByConsumer,
   getOrdersBySeller,
+  refundOrder,
+  updateOrder,
 } from "./orders.service";
 
 const orderRouter = Router();
@@ -75,6 +77,24 @@ const handleGetOrdersBySeller = async (req: Request, res: Response) => {
   }
 };
 
+const handleCompleteOrder = async (req: Request, res: Response) => {
+  try {
+    const order = await completeOrder(req.params.id);
+    res.status(200).json(order);
+  } catch (error: any) {
+    res.status(500).json({ error: error.message });
+  }
+};
+
+const handleRefundOrder = async (req: Request, res: Response) => {
+  try {
+    const order = await refundOrder(req.params.id);
+    res.status(200).json(order);
+  } catch (error: any) {
+    res.status(500).json({ error: error.message });
+  }
+};
+
 orderRouter.route("/").get(handleGetOrders).post(handleCreateOrder);
 orderRouter
   .route("/:id")
@@ -83,5 +103,7 @@ orderRouter
   .delete(handleDeleteOrder);
 orderRouter.route("/consumer/:consumer").get(handleGetOrdersByConsumer);
 orderRouter.route("/seller/:seller").get(handleGetOrdersBySeller);
+orderRouter.route("/complete/:id").put(handleCompleteOrder);
+orderRouter.route("/refund/:id").put(handleRefundOrder);
 
 export default orderRouter;
