@@ -113,6 +113,9 @@ const [anonAadhaar] = useAnonAadhaar();
   - The introduction of the support chat provided a streamlined approach to handle disputes or dissatisfaction, promoting a user-centric and responsive system for dispute resolution within the service.
 
 ## ⏭️ What's Next
+- **Enable direct off-ramping of cryptocurrency**: Enabling direct off-ramping of cryptocurrency can be simplified through the integration of the Saber SDK by Mudrex. This SDK streamlines the process, allowing for a seamless conversion of crypto assets into traditional fiat currencies. With Mudrex's Saber SDK, users can efficiently and directly withdraw their crypto holdings, providing a user-friendly and convenient off-ramping solution. The SDK's features facilitate a straightforward experience, ensuring that users can easily convert and access the value of their cryptocurrencies in traditional financial systems. This integration enhances accessibility and usability, contributing to a more versatile and user-centric crypto off-ramping experience.
+
+- **Enable easier on-boarding with the help of OKTO Wallet**: Okto Wallet or any similar wallet service can enhance the onboarding experience for users, making it efficient, secure, and user-friendly.
 
 ## 🤝 Contributions
 Meet the creators of Servify:
