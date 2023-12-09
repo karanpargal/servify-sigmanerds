@@ -19,12 +19,13 @@ Built with ☕ and ❤️ at [ETHIndia 2023](https://ethindia.co/).
 
 Accessing dependable and trustworthy local services can be difficult in today's fast-paced environment. People often face difficulties in finding trustworthy providers for tasks such as gardening, carpentry, and tutoring within their communities. This lack of a centralized, secure platform contributes to uncertainties surrounding service quality, reliability, and safety.
 
-To address this issue, we propose the creation of Servify, a platform designed to connect individuals seeking local services with qualified providers on blockchain, for unparalleled credibility, accountability and authenticity.
+To address this issue, we present you **Servify**, a platform designed to connect individuals seeking local services with qualified providers on blockchain, for unparalleled credibility, accountability and authenticity.
 
 ## 🧠 Knowledge Primer
 
  - **Anon Aadhaar** is a zero-knowledge protocol that allows Aadhaar ID owners to prove their identity in a privacy preserving way. It provides a set of tools to generate and verify proofs, authenticate users and verify proofs on-chain.
  - **Scroll** is a Layer 2 blockchain platform that aims to scale Ethereum by processing transactions off-chain and then committing them to the main Ethereum chain. It utilizes zero-knowledge proofs (ZKPs) to verify the validity of these off-chain transactions without revealing the underlying data, ensuring scalability, privacy, and security.
+ - **Push Protocol** Push Protocol, formerly known as EPNS, is a Web3 communication protocol that enables cross-chain notifications and messaging for dApps, wallets, and services. It provides a decentralized and gasless way for users to receive real-time updates and interact with Web3 applications.
 
 
 
@@ -54,11 +55,12 @@ Servify addresses these challenges by leveraging Anon Aadhaar verification to cr
 
 ### Ethereum Foundation: Anon Aadhar
  - **Usage**: Anon Aadhar is being utilised as proof of citizenship and identity in Servify, to maintain anonimity while provisioning credibility.
- - **Implementation**:
+ - **Implementation**: Anon-Aadhar is being used 
 
 ### Push Protocol
- - **Usage**: 
- - **Implementation**:
+ - **Usage**: Push Protocol is a decentralized notification protocol built on Ethereum blockchain.
+ - **Implementation**: Servify is using **Support Chat** to offer real-time chat support to the users directly, eliminating the need for users to switch to external platforms, creating a seamless and convenient experience. **P2P Chat** facilitates secure and decentralized peer-to-peer communication between users without the need for centralized servers and intermediaries, ensuring privacy and data ownership. Servify uses **Token Gated Chat** restricting access to specific groups of users based on their token ownership. This enables the creation of exclusive communities for high-value users, fostering deeper engagement and loyalty.
+
 
 ### Scroll
  - **Usage**:
