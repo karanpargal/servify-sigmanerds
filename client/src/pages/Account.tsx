@@ -4,12 +4,11 @@ import ManageAccounts from '@/components/Account/ManageAccounts';
 import PastOrdersCard from '@/components/Account/PastOrdersCard';
 import ProfileCard from '@/components/Account/ProfileCard';
 import Settings from '@/components/Account/Settings';
+import useWallet from '@/hooks/useWallet';
 import axios from 'axios';
-import { useAccount, useBalance } from 'wagmi';
 
 const Accounts = () => {
-  const { address } = useAccount();
-  const { data: balance } = useBalance({ address: address });
+  const { address, balance } = useWallet();
 
   const balanceInINR = async () => {
     const tokenInINR = await axios.post(
@@ -35,7 +34,7 @@ const Accounts = () => {
   balanceInINR();
 
   return (
-    <div className="container border">
+    <div className="container ">
       <div className="flex justify-center ">
         <div className="flex-row">
           <div>
@@ -69,6 +68,17 @@ const Accounts = () => {
 
           <div>
             <Footer />
+          </div>
+
+          <div className="mr-10 mt-10 flex flex-row justify-center gap-4">
+            <div>
+              <button className="rounded-lg border p-4 px-8 text-2xl">
+                Switch to Provider
+              </button>
+            </div>
+            <button className="rounded-lg border p-4 px-8 text-2xl">
+              Log Out
+            </button>
           </div>
         </div>
       </div>

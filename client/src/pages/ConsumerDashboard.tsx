@@ -1,8 +1,8 @@
-import React from 'react';
 import TimelineCard from '@/components/TimelineCard';
 
 import FrequentOrdersCard from '@/components/FrequentOrdersCard';
 import RecommendedServiceCard from '@/components/RecommendedServiceCard';
+
 
 const ConsumerDashboard = () => {
   return (
@@ -12,8 +12,6 @@ const ConsumerDashboard = () => {
 
           <div className="flex flex-col flex-1 w-full pr-12">
             <div className=" flex flex-row border pl-10 gap-x-8 p-10">
-             <RecommendedServiceCard/>
-             <RecommendedServiceCard/>
              <RecommendedServiceCard/>
             </div>
 
