@@ -1,3 +1,6 @@
+import useWallet from '@/hooks/useWallet';
+import { CONSTANTS, PushAPI } from '@pushprotocol/restapi';
+import { Button } from '@pushprotocol/uiweb';
 import { useState } from 'react';
 import HeroIcons from '../shared/HeroIcons';
 import { Switch } from '../ui/switch';
@@ -42,6 +45,7 @@ const notificationDetails: NotificationDetails = {
 
 const Settings = () => {
   const [isModalOpen, setModalOpen] = useState(false);
+  const { walletClient: signer } = useWallet();
 
   const openModal = () => {
     setModalOpen(true);
@@ -49,6 +53,29 @@ const Settings = () => {
 
   const closeModal = () => {
     setModalOpen(false);
+  };
+
+  const savePref = async () => {
+    const userAlice = await PushAPI.initialize(signer, {
+      env: CONSTANTS.ENV.STAGING,
+    });
+
+    const response = await userAlice.notification.subscribe(
+      `eip155:11155111:0xC2e7D52caEecC220AF3f48785ebdF8b331a7B668`,
+      {
+        settings: [
+          { enabled: true, value: 1 },
+          { enabled: false },
+          { enabled: true, value: 1 },
+          { enabled: true, value: 1 },
+          { enabled: true, value: 1 },
+          { enabled: true, value: 1 },
+          { enabled: true, value: 1 },
+        ],
+      },
+    );
+
+    console.log(response);
   };
 
   return (
@@ -76,15 +103,26 @@ const Settings = () => {
                 <div className="w-96">
                   <h3 className="text-lg">{notificationDetails[key].title}</h3>
                 </div>
-                <Switch />
+                <Switch defaultChecked />
               </div>
             ))}
-            <button
-              className="mt-2 rounded-md bg-zinc-900 px-4 py-2 text-white"
-              onClick={closeModal}
-            >
-              Close
-            </button>
+            <div className="mt-6">
+              <Button
+                className="rounded-lg bg-zinc-900 px-4 py-1 text-white"
+                onClick={() => {
+                  savePref();
+                  closeModal();
+                }}
+              >
+                Save
+              </Button>
+              <Button
+                className="ml-4 rounded-lg bg-red-600 px-4 py-1 text-white"
+                onClick={closeModal}
+              >
+                Cancel
+              </Button>
+            </div>
           </div>
         </div>
       )}
