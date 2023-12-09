@@ -35,7 +35,7 @@
     "clsx": "^2.0.0",
     "date-fns": "^2.30.0",
     "dayjs": "^1.11.10",
-    "ethers": "^5.7",
+    "ethers": "^5.7.2",
     "formik": "^2.4.5",
     "framer-motion": "^10.16.15",
     "localforage": "^1.10.0",

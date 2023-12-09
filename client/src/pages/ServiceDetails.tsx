@@ -13,7 +13,10 @@ import dayjs from 'dayjs';
 import { useFormik } from 'formik';
 import { useMemo, useState } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
+import { useContractWrite } from 'wagmi';
 import * as Yup from 'yup';
+import { escrowContractABI } from '../../../server/consts/escrow';
+import { OrderClientType } from '../../../server/orders/orders.schema';
 import { ServiceClientType } from '../../../server/services/services.schema';
 
 const ServiceDetails = () => {
@@ -102,6 +105,12 @@ function BookServiceForm({
   const { toast } = useToast();
   const tomorrow = dayjs().add(1, 'day').startOf('day').toDate();
 
+  const { write } = useContractWrite({
+    address: '0xC434c7be548A31fb8dA76f0CC3Cf25e51166B039',
+    abi: escrowContractABI,
+    functionName: 'depositFunds',
+  });
+
   const BookServiceSchema = useMemo(
     () =>
       Yup.object().shape({
@@ -122,13 +131,20 @@ function BookServiceForm({
     onSubmit: async (values) => {
       console.log(service);
       try {
-        await axiosClient.post(`/orders`, {
+        const response = await axiosClient.post<OrderClientType>(`/orders`, {
           consumer: userData?._id,
           service: service._id,
           seller: service.seller._id,
           address: values.address,
           amount: service.price,
           serviceDate: values.date,
+        });
+
+        const weiValue = 0.0000051 * service.price * 1000000000000000000;
+
+        write({
+          args: [response.data._id],
+          value: BigInt(weiValue),
         });
         toast({ title: 'Booking created!' });
         onSuccess?.();

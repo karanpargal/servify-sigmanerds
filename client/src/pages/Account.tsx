@@ -4,12 +4,14 @@ import ManageAccounts from '@/components/Account/ManageAccounts';
 import PastOrdersCard from '@/components/Account/PastOrdersCard';
 import ProfileCard from '@/components/Account/ProfileCard';
 import Settings from '@/components/Account/Settings';
+import Button from '@/components/ui/button';
 import useUserData from '@/hooks/useUserData';
 import axios from 'axios';
 import useWallet from '../hooks/useWallet';
 
 const Accounts = () => {
-  const { address } = useWallet();
+  const { address, disconnect } = useWallet();
+
   const { data: userData } = useUserData();
 
   const handleChangePref = async () => {
@@ -48,14 +50,14 @@ const Accounts = () => {
   balanceInINR();
 
   return (
-    <div className="container ">
-      <div className="mt-8 flex justify-center">
-        <div className=" flex-row rounded-xl border  bg-background-secondary p-4 pb-8">
-          <div>
-            <ProfileCard />
-          </div>
+    <div className="container w-1/2">
+      <div className=" bg-background-secondary rounded-xl  border p-4 pb-8 mt-8">
+        <div>
+          <ProfileCard />
+        </div>
 
-          <div className="item-start m-4 flex justify-between ">
+        <div className="grid grid-rows-3 place-self-stretch">
+          <div className=" m-4 grid grid-cols-2  ">
             <div>
               <PastOrdersCard />
             </div>
@@ -63,8 +65,7 @@ const Accounts = () => {
               <HelpAndSupport />
             </div>
           </div>
-
-          <div className="m-4 mt-10 flex justify-between ">
+          <div className="m-4 mt-6 grid grid-cols-2  ">
             <div>
               <ManageAccounts />
             </div>
@@ -73,22 +74,30 @@ const Accounts = () => {
             </div>
           </div>
 
-          <div>
+          <div className="m-4 mt-10 grid grid-cols-2  ">
             <Footer />
-          </div>
-
-          <div className="mr-10 mt-10 flex flex-row justify-center gap-4">
-            <button
-              className="rounded-lg border p-4 px-8 text-2xl"
+            <Button
+              className="w-1/2 bg-red-600 hover:bg-red-400"
               onClick={() => {
-                handleChangePref();
+                disconnect();
               }}
             >
-              {userData?.preference === 'provider'
-                ? 'Consumer only dashboard'
-                : 'Become a provider'}
-            </button>
+              <span>Log Out</span>
+            </Button>
           </div>
+        </div>
+
+        <div className="mr-10 mt-10 flex flex-row justify-center gap-4">
+          <Button
+            className="rounded-lg p-4 px-8 py-6 text-xl"
+            onClick={() => {
+              handleChangePref();
+            }}
+          >
+            {userData?.preference === 'provider'
+              ? 'Consume services'
+              : 'Provide services'}
+          </Button>
         </div>
       </div>
     </div>

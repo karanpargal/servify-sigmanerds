@@ -1,8 +1,21 @@
+import { ethers } from "ethers";
+import { escrowContractABI, escrowContractAddress } from "../consts/escrow";
 import orderSchema, { OrderType } from "./orders.schema";
 
 const createOrder = async (order: OrderType) => {
   try {
     const newOrder = await orderSchema.create(order);
+    const seller = await newOrder.populate("seller").execPopulate();
+
+    const provider = new ethers.providers.JsonRpcProvider(process.env.RPC_URL!);
+    const signer = new ethers.Wallet(process.env.PRIVATE_KEY!, provider);
+    const contract = new ethers.Contract(
+      escrowContractAddress,
+      escrowContractABI,
+      signer
+    );
+    const tx = await contract.createOrder(newOrder._id, seller.walletAddress);
+    await tx.wait();
     return newOrder;
   } catch (error) {
     throw error;
