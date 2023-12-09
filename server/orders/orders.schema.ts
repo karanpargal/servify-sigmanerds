@@ -53,6 +53,10 @@ const orderSchema = new mongoose.Schema(
     completedAt: {
       type: Date,
     },
+    chatId: {
+      type: String,
+      default: "",
+    },
     createdAt: {
       type: Date,
       default: Date.now,
@@ -84,4 +88,5 @@ export type OrderType = {
   isAccepted?: boolean;
   createdAt?: Date;
   serviceDate: Date;
+  chatId?: string;
 };

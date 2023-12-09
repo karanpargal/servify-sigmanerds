@@ -106,9 +106,8 @@ function BookServiceForm({
 
   const { toast } = useToast();
   const tomorrow = dayjs().add(1, 'day').startOf('day').toDate();
-  const { walletClient: signer } = useWallet();
 
-  const pushUser = PushAPI.initialize(signer, { env: CONSTANTS.ENV.STAGING });
+  const { walletClient: signer } = useWallet();
 
   const { write } = useContractWrite({
     address: '0xC434c7be548A31fb8dA76f0CC3Cf25e51166B039',
@@ -143,6 +142,10 @@ function BookServiceForm({
           address: values.address,
           amount: service.price,
           serviceDate: values.date,
+        });
+
+        const pushUser = PushAPI.initialize(signer, {
+          env: CONSTANTS.ENV.STAGING,
         });
 
         const userChatBegin = (await pushUser).chat.send(
