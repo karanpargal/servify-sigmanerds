@@ -7,7 +7,9 @@
 // preference: "provider" | "consumer"; radio group
 
 import Button from '@/components/ui/button';
+import useUserData from '@/hooks/useUserData';
 import useWallet from '@/hooks/useWallet';
+import { Navigate } from 'react-router-dom';
 
 // addresses: string[]; accept first address
 import { Input } from '@/components/ui/input';
@@ -24,11 +26,16 @@ import {
 import { Switch } from '@/components/ui/switch';
 import axios from 'axios';
 import { Formik } from 'formik';
+import { useState } from 'react';
 import * as Yup from 'yup';
 
 export default function Onboarding() {
+  const [step, setstep] = useState<0 | 1>(0);
   const { disconnect, address: walletAddress } = useWallet();
 
+  const userData = useUserData();
+
+  if (userData) return <Navigate to="/dashboard" />;
   const SignInSchema = Yup.object().shape({
     name: Yup.string()
       .min(2, 'Too Short!')

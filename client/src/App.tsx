@@ -1,15 +1,17 @@
+import OnboardedRoute from '@/components/shared/OnboardedRoute';
 import ProtectedRoute from '@/components/shared/ProtectedRoute';
+import RootLayout from '@/components/shared/RootLayout';
+import { Toaster } from '@/components/ui/toaster';
+import useWallet from '@/hooks/useWallet';
+
 import NotFound from '@/pages/404';
 import Accounts from '@/pages/Account';
-import ConsumerDashboard from '@/pages/ConsumerDashboard';
+import Dashboard from '@/pages/Dashboard';
 import Home from '@/pages/Home';
+import Onboarding from '@/pages/Onboarding';
 import Orders from '@/pages/Orders';
-import RootLayout from '@/pages/RootLayout';
+
 import { Navigate, Route, Routes } from 'react-router-dom';
-import OnboardedRoute from './components/shared/OnboardedRoute';
-import { Toaster } from './components/ui/toaster';
-import useWallet from './hooks/useWallet';
-import Onboarding from './pages/Onboarding';
 
 function App() {
   const { isConnected } = useWallet();
@@ -33,7 +35,7 @@ function App() {
           <Route path="onboarding" Component={Onboarding} />
 
           <Route element={<OnboardedRoute />}>
-            <Route path="dashboard" Component={ConsumerDashboard} />
+            <Route path="dashboard" Component={Dashboard} />
             <Route path="orders" Component={Orders} />
             <Route path="account" Component={Accounts} />
             {/* <Route
