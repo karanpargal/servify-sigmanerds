@@ -90,10 +90,14 @@ export type ServiceType = {
   description: string;
   ratings?: number;
   category: string;
-  seller: mongoose.Schema.Types.ObjectId;
+  seller: {
+    _id: string;
+    name: string;
+    email: string;
+  };
   numOfReviews?: number;
   reviews?: {
-    user: mongoose.Schema.Types.ObjectId;
+    user: string;
     rating: number;
     comment: string;
   }[];
