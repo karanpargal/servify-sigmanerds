@@ -1,7 +1,7 @@
 import { HeroSolidIcons } from '@/components/shared/HeroIcons';
 import Loader from '@/components/shared/Loader';
-import DatePicker from '@/components/ui/DatePicker';
 import Button from '@/components/ui/button';
+import DatePicker from '@/components/ui/datepicker';
 import Dialog from '@/components/ui/dialog';
 import { Textarea } from '@/components/ui/textarea';
 import { useToast } from '@/components/ui/use-toast';
@@ -35,7 +35,7 @@ const ServiceDetails = () => {
             <h1 className="mb-4 text-2xl font-semibold">{service.data.name}</h1>
             <div className="mb-6 flex items-center justify-between">
               <article className="flex items-center gap-x-2 rounded-md  border-2 border-accent-primary/80 bg-accent-primary/10 px-3 py-1 text-sm">
-                <HeroSolidIcons.UserCircleIcon className="h-auto w-6" />{' '}
+                <HeroSolidIcons.UserCircleIcon className="h-auto w-6" />
                 {service.data.seller.name}
               </article>
               <div className="flex flex-col items-end gap-x-1">
