@@ -11,7 +11,7 @@ export default function useCustomerOrderListing() {
     isLoading,
     isError,
   } = useQuery({
-    queryKey: ['services', user.data?._id],
+    queryKey: ['orders', 'customer', user.data?._id],
 
     // @ts-expect-error bad types
     // eslint-disable-next-line @typescript-eslint/no-non-null-asserted-optional-chain

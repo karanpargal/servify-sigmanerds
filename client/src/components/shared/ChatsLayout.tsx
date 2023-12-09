@@ -1,12 +1,46 @@
 import useUserData from '@/hooks/useUserData';
+import useWallet from '@/hooks/useWallet';
 import { cn } from '@/utils';
+import { CONSTANTS, IFeeds, PushAPI, SignerType } from '@pushprotocol/restapi';
 import { motion } from 'framer-motion';
-import { NavLink, useOutlet } from 'react-router-dom';
+import React, { useEffect, useState } from 'react';
+import {
+  NavLink,
+  useNavigate,
+  useOutlet,
+  useSearchParams,
+} from 'react-router-dom';
 
 export default function ChatLayout() {
   const outlet = useOutlet();
   const { data: userData } = useUserData();
+  const { walletClient } = useWallet();
 
+  const [chats, setChats] = useState<IFeeds[]>([]);
+
+  useEffect(() => {
+    (async function () {
+      const userAlice = await PushAPI.initialize(walletClient as SignerType, {
+        env: CONSTANTS.ENV.STAGING,
+      });
+
+      const userAliceChats = await userAlice.chat.list('CHATS');
+      setChats(userAliceChats);
+    })();
+  }, [userData]);
+
+  const [searchParams, setSearchParams] = useSearchParams();
+  const navigate = useNavigate();
+
+  useEffect(() => {
+    const walletId = searchParams.get('walletId');
+    if (!walletId) return;
+
+    const chat = chats.find((chat) => chat.wallets.split(':')[1] === walletId);
+    if (chat) {
+      navigate(`./${chat.chatId}`);
+    }
+  }, [chats]);
   return (
     <main
       className={cn(
@@ -27,17 +61,52 @@ export default function ChatLayout() {
             />
           </>
         )}
+        {chats.map((chat) =>
+          chat.chatId ? (
+            <ChatCard
+              key={chat.threadhash}
+              address={chat.wallets.split(':')[1]}
+              chatId={chat.chatId}
+            />
+          ) : (
+            <React.Fragment key={chat.threadhash} />
+          ),
+        )}
       </aside>
       {outlet && <section className="h-full">{outlet}</section>}
     </main>
   );
 }
 
-type ChatCardProps = {
-  chatId: string;
-  title: string;
-};
-export function ChatCard({ chatId, title }: ChatCardProps) {
+type ChatCardProps = { chatId: string; address?: string; title?: string } & (
+  | {
+      address: string;
+    }
+  | { title: string }
+);
+export function ChatCard({ chatId, address, title }: ChatCardProps) {
+  const { data: user } = useUserData({ address });
+  if (title)
+    return (
+      <NavLink
+        to={`./${chatId}`}
+        className="block border-b border-stone-100 last:border-b-0"
+      >
+        {({ isActive }) => (
+          <article className="relative px-4 py-3">
+            {title}
+            {isActive && (
+              <motion.span
+                layoutId="chat-navbar-indicator"
+                className="absolute right-0 top-0 h-full w-1 rounded-l-lg bg-accent-primary"
+              />
+            )}
+          </article>
+        )}
+      </NavLink>
+    );
+  if (address && !user) return null;
+
   return (
     <NavLink
       to={`./${chatId}`}
@@ -45,7 +114,7 @@ export function ChatCard({ chatId, title }: ChatCardProps) {
     >
       {({ isActive }) => (
         <article className="relative px-4 py-3">
-          {title}
+          {user?.name}
           {isActive && (
             <motion.span
               layoutId="chat-navbar-indicator"

@@ -1,5 +1,3 @@
-import TimelineCard from '@/components/TimelineCard';
-
 import ProvidedServicesCard from '@/components/Account/ProvidedServicesCard';
 
 import FeaturedServices from '@/components/Dashboard/FeaturedServices';
@@ -14,7 +12,7 @@ export default function Dashboard() {
 
   return (
     <main className="min-h-screen">
-      <div className="mx-auto grid max-w-7xl grid-cols-[1fr_auto] gap-6 p-6">
+      <div className="mx-auto grid max-w-7xl grid-cols-1 gap-6 p-6">
         {/* Left col */}
         <div className="min-w-0 space-y-6">
           {role === 'consumer' && <FeaturedServices />}
@@ -44,11 +42,12 @@ export default function Dashboard() {
             <FrequentOrdersCard />
             <FrequentOrdersCard /> */}
           </section>
+          {role === 'provider' && <FeaturedServices />}
         </div>
         {/* Right cols */}
-        <div className="rounded-xl bg-background-secondary p-4 shadow-card">
+        {/* <div className="rounded-xl bg-background-secondary p-4 shadow-card">
           <TimelineCard />
-        </div>
+        </div> */}
       </div>
     </main>
   );
