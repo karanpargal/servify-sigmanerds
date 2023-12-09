@@ -88,5 +88,5 @@ export type ServiceType = {
     comment: string;
   }[];
   isActive?: boolean;
-  createdAt: Date;
+  createdAt?: Date;
 };
