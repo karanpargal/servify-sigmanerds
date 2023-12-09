@@ -5,6 +5,7 @@ Built with ☕ and ❤️ at [ETHIndia 2023](https://ethindia.co/).
 ## 📝 Table of Contents
  - Goals
  - Knowledge Primer
+ - What Problems Servify Solves
  - Preview
  - Technology Stack
  - Architecture
@@ -16,7 +17,21 @@ Built with ☕ and ❤️ at [ETHIndia 2023](https://ethindia.co/).
 
 ## 💡 Goals
 
+Accessing dependable and trustworthy local services can be difficult in today's fast-paced environment. People often face difficulties in finding trustworthy providers for tasks such as gardening, carpentry, and tutoring within their communities. This lack of a centralized, secure platform contributes to uncertainties surrounding service quality, reliability, and safety.
+
+To address this issue, we propose the creation of Servify, a platform designed to connect individuals seeking local services with qualified providers on blockchain, for unparalleled credibility, accountability and authenticity.
+
 ## 🧠 Knowledge Primer
+
+ - **Anon Aadhaar** empowers Aadhaar ID holders to prove their identity without revealing any personal information. It provides tools for generating proofs, verifying users, and confirming proofs on the blockchain, ensuring privacy and security.
+
+## 🚩 What Problems Servify Solves
+ - **Lack of a Centralized Hub:** The absence of a centralized platform for local services with verified credibility creates difficulties for individuals looking to connect with reliable service providers within their communities.
+ - **Trust and Security Concerns:** Current methods for verifying service providers often fall short in establishing trust and security, leading to reservations among users about the reliability of the services offered.
+ - **Need for Anonymity and Verification:** Anon Aadhaar will serve as a solution to balance the need for user anonymity with the requirement for identity verification, offering a secure and privacy-centric approach to establishing trust.
+ - **Community-Based Exchanges:** The proposed platform aims to facilitate secure and reliable exchanges within the community, fostering a sense of safety and accountability among users.
+
+Servify addresses these challenges by leveraging Anon Aadhaar verification to create a transparent, and secure environment for local service exchanges.
 
 ## 📺 Preview
 
