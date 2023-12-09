@@ -71,13 +71,8 @@ const Accounts = () => {
           </div>
 
           <div className="mr-10 mt-10 flex flex-row justify-center gap-4">
-            <div>
-              <button className="rounded-lg border p-4 px-8 text-2xl">
-                Switch to Provider
-              </button>
-            </div>
             <button className="rounded-lg border p-4 px-8 text-2xl">
-              Log Out
+              Switch to Provider
             </button>
           </div>
         </div>

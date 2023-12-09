@@ -1,5 +1,4 @@
 import { User, UserType } from "./users.schema";
-import { hash, compare } from "bcrypt";
 
 const createUser = async (user: UserType) => {
   try {
@@ -9,8 +8,6 @@ const createUser = async (user: UserType) => {
     if (existingUser) {
       throw new Error("User already exists");
     }
-    const password = await hash(user.password, 10);
-    user.password = password;
     const newUser = await User.create(user);
     return newUser;
   } catch (error) {
@@ -59,4 +56,4 @@ const deleteUser = async (walletAddress: string) => {
   }
 };
 
-export { createUser, getUser, getUsers, updateUser, deleteUser };
+export { createUser, deleteUser, getUser, getUsers, updateUser };

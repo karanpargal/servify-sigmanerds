@@ -3,17 +3,17 @@
 Built with ☕ and ❤️ at [ETHIndia 2023](https://ethindia.co/).
 
 ## 📝 Table of Contents
- - Goals
- - Knowledge Primer
- - What Problems Servify Solves
- - Preview
- - Technology Stack
- - Architecture
- - Emphasis on Tracks
- - Challenges
- - What's Next
- - Contributions
- - License
+ - [Goals](https://github.com/karanpargal/sigmanerds?tab=readme-ov-file#-goals)
+ - [Knowledge Primer](https://github.com/karanpargal/sigmanerds?tab=readme-ov-file#-knowledge-primer)
+ - [What Problems Servify Solves](https://github.com/karanpargal/sigmanerds?tab=readme-ov-file#-what-problems-servify-solves)
+ - [Preview](https://github.com/karanpargal/sigmanerds?tab=readme-ov-file#-preview)
+ - [Technology Stack](https://github.com/karanpargal/sigmanerds?tab=readme-ov-file#-technology-stack)
+ - [Architecture](https://github.com/karanpargal/sigmanerds?tab=readme-ov-file#-architecture)
+ - [Emphasis on Tracks](https://github.com/karanpargal/sigmanerds?tab=readme-ov-file#-emphasis-on-tracks)
+ - [Challenges](https://github.com/karanpargal/sigmanerds?tab=readme-ov-file#-challenges)
+ - [What's Next](https://github.com/karanpargal/sigmanerds?tab=readme-ov-file#%EF%B8%8F-whats-next)
+ - [Contributions](https://github.com/karanpargal/sigmanerds?tab=readme-ov-file#-contributions)
+ - [License](https://github.com/karanpargal/sigmanerds?tab=readme-ov-file#-license)
 
 ## 💡 Goals
 
@@ -23,7 +23,7 @@ To address this issue, we propose the creation of Servify, a platform designed t
 
 ## 🧠 Knowledge Primer
 
- - **Anon Aadhaar** empowers Aadhaar ID holders to prove their identity without revealing any personal information. It provides tools for generating proofs, verifying users, and confirming proofs on the blockchain, ensuring privacy and security.
+ - **Anon Aadhaar** is a zero-knowledge protocol that allows Aadhaar ID owners to prove their identity in a privacy preserving way. It provides a set of tools to generate and verify proofs, authenticate users and verify proofs on-chain.
 
 ## 🚩 What Problems Servify Solves
  - **Lack of a Centralized Hub:** The absence of a centralized platform for local services with verified credibility creates difficulties for individuals looking to connect with reliable service providers within their communities.
@@ -37,9 +37,32 @@ Servify addresses these challenges by leveraging Anon Aadhaar verification to cr
 
 ## 💻 Technology Stack
 
+| Blockchain ⛓️ | Backend 🛠️ | Frontend ✨ |
+| :---: | :---: | :---: |
+| Solidity | Node | React |
+| Scroll | Express | TypeScript |
+| Base | TypeScript | Formik |
+|   |   | Yep |
+|   |   | Framer Motion |
+
 ## 📐 Architecture
 
 ## 👔 Emphasis on Tracks
+
+### Ethereum Foundation: Anon Aadhar
+ - **Usage**: Anon Aadhar is being utilised as proof of citizenship and identity in Servify, to maintain anonimity while provisioning credibility.
+ - **Implementation**:
+
+### Push Protocol
+ - **Usage**: 
+ - **Implementation**:
+
+### Scroll
+ - **Usage**:
+ - **Implementation**: Sepolia Testnet Explorer on https://sepolia.scrollscan.com/
+   - SBT on Scroll: `0x189D6807030b09D86CA4c61c8bfE22DDcA4A682E` [Link](https://sepolia.scrollscan.com/address/0x189D6807030b09D86CA4c61c8bfE22DDcA4A682E)
+   - Escrow on Scroll: `0x25Bb7EB5AbcE2B2245Ac2E5dDD3988765f624FE5` [Link](https://sepolia.scrollscan.com/address/0x25bb7eb5abce2b2245ac2e5ddd3988765f624fe5)
+
 
 ## 😭 Challenges
 

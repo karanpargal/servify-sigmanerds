@@ -1,5 +1,7 @@
 import { LogInWithAnonAadhaar, useAnonAadhaar } from 'anon-aadhaar-react';
 
+import useWallet from '@/hooks/useWallet';
+import axios from 'axios';
 import { useFormik } from 'formik';
 import { useEffect } from 'react';
 import * as Yup from 'yup';
@@ -16,6 +18,7 @@ import {
   SelectValue,
 } from '../ui/select';
 import { Switch } from '../ui/switch';
+import { useToast } from '../ui/use-toast';
 
 const UserDetailsSchema = Yup.object().shape({
   name: Yup.string().trim().max(150, 'Too Long!').required('Name is required'),
@@ -38,6 +41,8 @@ const UserDetailsSchema = Yup.object().shape({
 
 export default function UserDetailsForm() {
   const [anonAadhaar] = useAnonAadhaar();
+  const { address: walletAddress } = useWallet();
+  const { toast } = useToast();
 
   useEffect(() => {
     if (anonAadhaar.status === 'logged-in') {
@@ -58,7 +63,26 @@ export default function UserDetailsForm() {
     },
     validationSchema: UserDetailsSchema,
     onSubmit: (values) => {
-      console.log(values);
+      axios
+        .post(`http://localhost:8080/api/v1/users/`, {
+          name: values.name,
+          email: values.email,
+          age: values.age,
+          sex: values.sex,
+          bio: values.bio,
+          preference: values.providerPreference ? 'provider' : 'consumer',
+          addresses: [values.address],
+          walletAddress: walletAddress,
+        })
+        .then((data) => {
+          console.log(data);
+        })
+        .finally(() => {
+          toast({
+            title: 'Details Submitted',
+            description: 'Going to dashboard now',
+          });
+        });
     },
   });
 
