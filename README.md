@@ -71,8 +71,8 @@ Servify addresses these challenges by leveraging Anon Aadhaar verification to cr
    - Escrow on Scroll: `0x25Bb7EB5AbcE2B2245Ac2E5dDD3988765f624FE5` [Link](https://sepolia.scrollscan.com/address/0x25bb7eb5abce2b2245ac2e5ddd3988765f624fe5)
 
 
-## 😭 Challenges
-- **Developer Experience of SDKs**: Inadequate or unclear documentation can significantly hindered the developer experience because as developers, we rely heavily on documentation to understand how to use the SDK effectively.
+## 💪 Challenges Faced (and WAGMI!)
+- **Developer Experience of SDKs**: Inadequate or unclear documentation did significantly hinder our developer experience because as developers, we rely heavily on documentation to understand how to use the SDK effectively.
 - **Figuring out the Settlement Flow**: A significant challenge we encountered was optimizing the settlement flow, especially in cases where users were dissatisfied with the service provided. Balancing flexibility for both users and providers presented a nuanced trade-off. Ultimately, we resolved this by implementing a support chat feature. This solution aimed to address user concerns efficiently, allowing for real-time communication and issue resolution. The introduction of the support chat provided a streamlined approach to handle disputes or dissatisfaction, promoting a user-centric and responsive system for dispute resolution within the service.
 
 ## ⏭️ What's Next
