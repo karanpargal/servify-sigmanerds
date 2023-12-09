@@ -13,7 +13,8 @@ import Orders from '@/pages/Orders';
 import BookService from './pages/BookService';
 
 import { Navigate, Route, Routes } from 'react-router-dom';
-import CreateServiceListingForm from './components/Forms/CreateServiceListingForm';
+import ChatLayout from './components/shared/ChatsLayout';
+import ChatView from './pages/Chat';
 
 function App() {
   const { isConnected } = useWallet();
@@ -26,7 +27,6 @@ function App() {
           element={isConnected ? <Navigate to="/dashboard" /> : <Home />}
         />
         <Route path="book-service" Component={BookService} />
-        <Route path="create-listing" Component={CreateServiceListingForm} />
         <Route
           path="/"
           element={
@@ -42,10 +42,9 @@ function App() {
             <Route path="orders" Component={Orders} />
             <Route path="account" Component={Accounts} />
 
-            {/* <Route
-          path="chat"
-          Component={Chat({ chatId: '123', signer: signer })}
-        /> */}
+            <Route path="chats" Component={ChatLayout}>
+              <Route path=":chatId" Component={ChatView} />
+            </Route>
           </Route>
         </Route>
         {/* Catch all route */}
