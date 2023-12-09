@@ -51,6 +51,7 @@ Servify addresses these challenges by leveraging Anon Aadhaar verification to cr
 
 ## 📐 Architecture
 ![Architecture](repository-assets/Architecture.png)
+`Note: Click on the image to see the full architecture clearly.`
 
 ## 👔 Emphasis on Tracks
 
