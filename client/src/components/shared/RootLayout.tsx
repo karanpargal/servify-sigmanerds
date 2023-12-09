@@ -1,20 +1,25 @@
 import { cn } from '@/utils';
 import { motion } from 'framer-motion';
 import { NavLink, Outlet } from 'react-router-dom';
+import CreateServiceListingForm from '../Forms/CreateServiceListingForm';
+import Button from '../ui/button';
+import Dialog from '../ui/dialog';
+import HeroIcons from './HeroIcons';
 export default function RootLayout() {
   return (
     <div>
-      <header className="border-b border-stone-200 bg-background-secondary">
+      <header className="relative border-b border-stone-200 bg-background-secondary">
         <nav className="mx-auto flex max-w-7xl items-center justify-center">
           <NavLink to="/dashboard">
             {({ isActive }) => (
               <motion.div
                 className={cn(
-                  'relative px-4 py-4',
+                  'relative flex items-center gap-x-2 px-4 py-4',
                   isActive && 'text-accent-primary',
                 )}
               >
-                Dashboard
+                <HeroIcons.HomeIcon className="h-auto w-5" />
+                <span className="max-lg:hidden">Dashboard</span>
                 {isActive && (
                   <motion.span
                     layoutId="rootLayoutNavIndicator"
@@ -28,11 +33,12 @@ export default function RootLayout() {
             {({ isActive }) => (
               <div
                 className={cn(
-                  'relative px-4 py-4',
+                  'relative flex items-center gap-x-2 px-4 py-4',
                   isActive && 'text-accent-primary',
                 )}
               >
-                Orders
+                <HeroIcons.WrenchScrewdriverIcon className="h-auto w-5" />
+                <span className="max-lg:hidden">Orders</span>
                 {isActive && (
                   <motion.span
                     layoutId="rootLayoutNavIndicator"
@@ -46,11 +52,12 @@ export default function RootLayout() {
             {({ isActive }) => (
               <div
                 className={cn(
-                  'relative px-4 py-4',
+                  'relative flex items-center gap-x-2 px-4 py-4',
                   isActive && 'text-accent-primary',
                 )}
               >
-                Chats
+                <HeroIcons.ChatBubbleBottomCenterTextIcon className="h-auto w-5" />
+                <span className="max-lg:hidden">Chats</span>
                 {isActive && (
                   <motion.span
                     layoutId="rootLayoutNavIndicator"
@@ -64,11 +71,12 @@ export default function RootLayout() {
             {({ isActive }) => (
               <div
                 className={cn(
-                  'relative px-4 py-4',
+                  'relative flex items-center gap-x-2 px-4 py-4',
                   isActive && 'text-accent-primary',
                 )}
               >
-                Account
+                <HeroIcons.UserIcon className="h-auto w-5" />
+                <span className="max-lg:hidden">Account</span>
                 {isActive && (
                   <motion.span
                     layoutId="rootLayoutNavIndicator"
@@ -79,6 +87,20 @@ export default function RootLayout() {
             )}
           </NavLink>
         </nav>
+        <Dialog>
+          <Dialog.Trigger asChild>
+            <Button className="absolute right-6 z-10 max-lg:fixed max-lg:bottom-8 max-lg:right-8 max-lg:h-auto max-lg:rounded-full max-lg:p-4  max-lg:shadow-card lg:top-1/2 lg:-translate-y-1/2">
+              <span className="max-lg:hidden">Create service listing</span>
+              <HeroIcons.PlusIcon className="h-auto w-5 lg:hidden" />
+            </Button>
+          </Dialog.Trigger>
+          <Dialog.Content>
+            <Dialog.Header className="mb-3">
+              <Dialog.Title>Create service listing</Dialog.Title>
+            </Dialog.Header>
+            <CreateServiceListingForm />
+          </Dialog.Content>
+        </Dialog>
       </header>
 
       <Outlet />

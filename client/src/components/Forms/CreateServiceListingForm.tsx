@@ -82,7 +82,9 @@ export default function CreateServiceListingForm() {
       </div>
 
       <div className="space-y-1">
-        <Label htmlFor="duration">Duration</Label>
+        <Label htmlFor="duration">
+          Duration <em className="font-normal">(In hours)</em>
+        </Label>
         <Input
           type="number"
           name="duration"
@@ -96,7 +98,9 @@ export default function CreateServiceListingForm() {
         )}
       </div>
       <div className="space-y-1">
-        <Label htmlFor="pricing">Pricing</Label>
+        <Label htmlFor="pricing">
+          Pricing <em className="font-normal">(In hours)</em>
+        </Label>
         <Input
           type="number"
           name="pricing"

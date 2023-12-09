@@ -1,15 +1,21 @@
 import {
   ChatUIProvider,
-  ChatView,
-  darkChatTheme,
   ENV,
   SignerType,
+  ChatView as _ChatView,
+  lightChatTheme,
 } from '@pushprotocol/uiweb';
+import { Navigate, useParams } from 'react-router-dom';
 
-export default function GroupChat({ chatId, signer }: ChatProps) {
+export default function ChatView() {
+  // get chatId from route params
+  const { chatId } = useParams<{ chatId: string }>();
+  // const {} = useWallet();
+
+  if (!chatId) return <Navigate to="/chats" />;
   return (
-    <ChatUIProvider theme={darkChatTheme} env={ENV.STAGING} signer={signer}>
-      <ChatView chatId={chatId} limit={10} isConnected={true} />
+    <ChatUIProvider theme={lightChatTheme} env={ENV.STAGING}>
+      <_ChatView chatId={chatId} limit={10} isConnected={true} />
     </ChatUIProvider>
   );
 }
