@@ -4,12 +4,13 @@ import ManageAccounts from '@/components/Account/ManageAccounts';
 import PastOrdersCard from '@/components/Account/PastOrdersCard';
 import ProfileCard from '@/components/Account/ProfileCard';
 import Settings from '@/components/Account/Settings';
+import useCustomerServiceListings from '@/hooks/useCustomerServiceListings';
 import useWallet from '@/hooks/useWallet';
 import axios from 'axios';
 
 const Accounts = () => {
   const { address, balance } = useWallet();
-
+  const { data } = useCustomerServiceListings();
   const balanceInINR = async () => {
     const tokenInINR = await axios.post(
       'https://api.1inch.dev/price/v1.1/',
