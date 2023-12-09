@@ -10,6 +10,7 @@ import Dashboard from '@/pages/Dashboard';
 import Home from '@/pages/Home';
 import Onboarding from '@/pages/Onboarding';
 import Orders from '@/pages/Orders';
+import BookService from './pages/BookService';
 
 import { Navigate, Route, Routes } from 'react-router-dom';
 
@@ -23,6 +24,7 @@ function App() {
           path="/"
           element={isConnected ? <Navigate to="/dashboard" /> : <Home />}
         />
+        <Route path="book-service" Component={BookService} />
 
         <Route
           path="/"
@@ -38,6 +40,7 @@ function App() {
             <Route path="dashboard" Component={Dashboard} />
             <Route path="orders" Component={Orders} />
             <Route path="account" Component={Accounts} />
+
             {/* <Route
           path="chat"
           Component={Chat({ chatId: '123', signer: signer })}
