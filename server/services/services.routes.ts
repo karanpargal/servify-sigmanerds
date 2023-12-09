@@ -1,11 +1,12 @@
-import { Router } from "express";
 import type { Request, Response } from "express";
+import { Router } from "express";
 import {
   createService,
+  deleteService,
   getService,
   getServices,
+  getUsersServices,
   updateService,
-  deleteService,
 } from "./services.service";
 
 const serviceRouter = Router();
@@ -14,6 +15,16 @@ const handleCreateService = async (req: Request, res: Response) => {
   try {
     const service = await createService(req.body);
     res.status(201).json(service);
+  } catch (error: any) {
+    res.status(500).json({ error: error.message });
+  }
+};
+
+const handleUsersServices = async (req: Request, res: Response) => {
+  try {
+    const sellerID = req.params.seller;
+    const services = await getUsersServices(sellerID);
+    res.status(201).json(services);
   } catch (error: any) {
     res.status(500).json({ error: error.message });
   }
@@ -61,6 +72,6 @@ serviceRouter
   .get(handleGetService)
   .put(handleUpdateService)
   .delete(handleDeleteService);
-serviceRouter.route("/seller/:seller").get(handleGetServices);
+serviceRouter.route("/seller/:seller").get(handleUsersServices);
 
 export default serviceRouter;
