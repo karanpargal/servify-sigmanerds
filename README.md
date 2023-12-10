@@ -60,11 +60,13 @@ To address this issue, we present you **Servify**, a platform designed to connec
 ### Push Protocol
 
 - **Usage**:
+  - **Push Notification:** This enables Servify to send real-time notifications to users' wallets or mobile devices, keeping them informed about important events, updates, and reminders.
+  - **Channel Settings:** We have also given user the freedom and choice to select which notification do they want to receive while using our application
   - **Support Chat**: Used for offering real-time chat support to the users directly, eliminating the need for users to switch to external platforms, creating a seamless and convenient experience.
   - **P2P Chat:** To facilitate secure and decentralized peer-to-peer communication between users without the need for centralized servers and intermediaries, ensuring privacy and data ownership.
   - **Token Gated Chat:** Used for restricting access to specific groups of users based on their token ownership. This enables the creation of exclusive communities for high-value users, fostering deeper engagement and loyalty.
-  - **Push Notification:** This enables Servify to send real-time notifications to users' wallets or mobile devices, keeping them informed about important events, updates, and reminders.
-- **Implementation**: Code with the implementation of Push Protocol is housed in `server/notifications/notifications.service.ts`. [Link](https://github.com/karanpargal/sigmanerds/blob/main/server/notifications/notifications.service.ts)
+- **Implementation**: Code with the implementation of notifications for Push Protocol is housed in `server/notifications/notifications.service.ts`. [Link](https://github.com/karanpargal/sigmanerds/blob/main/server/notifications/notifications.service.ts)
+  For Chat functionalities, you can visit the Chat pages in the client subdirectory.
 
 ### Ethereum Foundation: Anon Aadhar
 
