@@ -39,6 +39,10 @@ To address this issue, we present you **Servify**, a platform designed to connec
 - **Middle-man relayering:** We also act as a middle man in any scenario of dispute over the service provider and consumer.
 
 ## 📺 Preview
+![Preview](repository-assets/doc_2023-12-10_08-31-12.png)
+![Preview](repository-assets/doc_2023-12-10_08-31-17.png)
+![Preview](repository-assets/doc_2023-12-10_08-31-23.png)
+![Preview](repository-assets/doc_2023-12-10_08-31-28.png)
 
 ## 💻 Technology Stack
 
