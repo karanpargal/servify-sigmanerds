@@ -112,7 +112,7 @@ const [anonAadhaar] = useAnonAadhaar();
 - **Usage**: Contracts pertaining to Servify are deployed on Scroll.
 - **Implementation**: Sepolia Testnet Explorer on https://sepolia.scrollscan.com/
   - SBT on Scroll: `0x189D6807030b09D86CA4c61c8bfE22DDcA4A682E` [Link](https://sepolia.scrollscan.com/address/0x189D6807030b09D86CA4c61c8bfE22DDcA4A682E)
-  - Escrow on Scroll: `0x25Bb7EB5AbcE2B2245Ac2E5dDD3988765f624FE5` [Link](https://sepolia.scrollscan.com/address/0x25bb7eb5abce2b2245ac2e5ddd3988765f624fe5)
+  - Escrow on Scroll: `0xC434c7be548A31fb8dA76f0CC3Cf25e51166B039` [Link](https://sepolia.scrollscan.com/address/0xC434c7be548A31fb8dA76f0CC3Cf25e51166B039)
 
 ## 💪 Challenges Faced (and WAGMI!)
 
