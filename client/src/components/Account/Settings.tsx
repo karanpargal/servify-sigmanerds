@@ -56,11 +56,11 @@ const Settings = () => {
   };
 
   const savePref = async () => {
-    const userAlice = await PushAPI.initialize(signer, {
+    const pushUser = await PushAPI.initialize(signer, {
       env: CONSTANTS.ENV.STAGING,
     });
 
-    const response = await userAlice.notification.subscribe(
+    const response = await pushUser.notification.subscribe(
       `eip155:11155111:0xC2e7D52caEecC220AF3f48785ebdF8b331a7B668`,
       {
         settings: [
