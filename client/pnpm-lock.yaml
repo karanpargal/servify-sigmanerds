@@ -7268,7 +7268,7 @@ packages:
       underscore: 1.12.1
     dev: false
 
-  /jsrsasign@10.9.0:
+  /jsrsasign@11.0.0:
     resolution: {integrity: sha512-QWLUikj1SBJGuyGK8tjKSx3K7Y69KYJnrs/pQ1KZ6wvZIkHkWjZ1PJDpuvc1/28c1uP0KW9qn1eI1LzHQqDOwQ==}
     dev: false
 
